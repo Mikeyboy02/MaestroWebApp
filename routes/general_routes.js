@@ -23,5 +23,10 @@ router
     .post(async (req, res) => {
 
     })
+router
+    .route("./profile")
+    .get(async (req, res) => {
+        
+    })
 
 export default router

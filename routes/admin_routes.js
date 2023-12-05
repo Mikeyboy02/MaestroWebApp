@@ -10,4 +10,10 @@ router
 
     })
 
+router
+    .route('/calendar')
+    .get(async (req, res) => {
+        
+    })
+
 export default router

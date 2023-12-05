@@ -2,12 +2,18 @@ import {Router} from 'express'
 const router = Router()
 
 router
-    .route('/schedule')
+    .route('/calendar')
     .get(async (req, res) => {
-        res.render("./instructorSchedule", {title: "Schedule"})
-    })
-    .patch(async (req, res) => {
 
+    })
+
+router 
+    .route('/booking')
+    .get(async (req, res) => {
+
+    })
+    .post(async (req, res) => {
+        
     })
 
 export default router
