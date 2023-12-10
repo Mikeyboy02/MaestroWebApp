@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  },
+  "name": "maestrowebapp",
+  "version": "1.0.0",
+  "description": "Website for Maestro Music Pros",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mikeyboy02/MaestroWebApp.git"
+  },
+  "author": "Michael Bearint",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mikeyboy02/MaestroWebApp/issues"
+  },
+  "homepage": "https://github.com/Mikeyboy02/MaestroWebApp#readme"
+}
