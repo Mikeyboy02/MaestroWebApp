@@ -1,5 +1,6 @@
 import {ObjectId} from 'mongodb';
-import { instructors } from '../config/mongoCollections';
+import { instructors } from '../config/mongoCollections.js';
+import bcrypt from 'bcryptjs';
 
 const exportedMethods = {
 
@@ -60,6 +61,26 @@ const exportedMethods = {
     if (updateInfo.lastErrorObject.n === 0) {
       throw `Could not update user with id ${Id}.`;
     }
+    return await this.getInstructorById(Id);
+  },
+  async updateAppointmentsAndAllowTimes(Id, allowedTimes, appointments) {
+    let updatedInstructor = {
+      allowedTimes: allowedTimes,
+      appointments: appointments
+    };
+    const user = await this.getInstructorById(Id);
+    //check updated parameters, if they were updated
+
+    //update user
+    const instructorCollection = await instructors();
+    const updateInfo = await instructorCollection.findOneAndUpdate(
+      {_id: new ObjectId(Id)},
+      {$set: updatedInstructor},
+      {returnDocument: 'after'}
+    );
+    // if (updateInfo.lastErrorObject.n === 0) {
+    //   throw `Could not update user with id ${Id}.`;
+    // }
     return await this.getInstructorById(Id);
   },
 

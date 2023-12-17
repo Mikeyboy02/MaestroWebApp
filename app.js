@@ -1,6 +1,7 @@
 import express from 'express';
 const app = express();
 import configRoutes from './routes/index.js';
+import session from 'express-session';
 
 import exphbs from 'express-handlebars';
 
@@ -26,6 +27,13 @@ const rewriteUnsupportedBrowserMethods = (req, res, next) => {
 
 app.use('/public', staticDir);
 app.use(express.json());
+app.use(session({
+  name: "maestroWebApp",
+  secret: "Secret",
+  saveUninitialized: false,
+  resave: false,
+  cookie: {maxAge: 600000000}
+}));
 app.use(express.urlencoded({extended: true}));
 app.use(rewriteUnsupportedBrowserMethods);
 
