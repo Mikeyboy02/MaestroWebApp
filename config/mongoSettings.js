@@ -2,7 +2,7 @@ import dotenv, {config} from 'dotenv';
 dotenv.config()
 
 export const mongoConfig = {
-  serverUrl: process.env.MONGO_SERVER_URL,
-  database: process.env.MONGO_DATABASE_NAME
+  serverUrl: 'mongodb://127.0.0.1:27017/',
+  database: 'maestro_web_app'
 };
 
