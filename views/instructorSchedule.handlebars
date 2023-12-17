@@ -12,6 +12,11 @@
     <div id="instructor-schedule">
         <div id="calendar"></div>
     </div>
+    <form action="/instructors/schedule" method="post" id="delete-form">
+        Make Appointment:
+    <input type="datetime-local" name="apptInput" id="apptInput" class="full-width-input">
+    <br>
+    <button type="submit">Submit</button>
 
     <script>
         $(document).ready(function() {
