@@ -25,6 +25,18 @@
                 // Calendar options and events will be added here
             });
         });
+
+        function addEvent(name, startTime, endTime) {
+            // var title = document.getElementById("title").value;
+            // var start = document.getElementById("start").value;
+            // var end = document.getElementById("end").value;
+            var eventData = {
+                title: name,
+                start: startTime,
+                end: endTime,
+            };
+            $('#calendar').fullCalendar('renderEvent', eventData, true);
+        }
     </script>
 </body>
 </html>
