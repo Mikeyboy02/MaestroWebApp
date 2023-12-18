@@ -17,7 +17,12 @@
     <input type="datetime-local" name="apptInput" id="apptInput" class="full-width-input">
     <br>
     <button type="submit">Submit</button>
-
+    </form>
+    <div id="appointmentDiv">
+        {{#each appointments}}
+        <li>Time: {{this}}</li>
+        {{/each}}
+    </div>
     <script>
         $(document).ready(function() {
             $('#calendar').fullCalendar({

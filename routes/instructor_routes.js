@@ -6,7 +6,7 @@ router
     .route('/schedule')
     .get(async (req, res) => {
         let currentUser = req.session.user;
-        res.render("./instructorSchedule", {title: "Schedule"})
+        res.render("./instructorSchedule", {title: "Schedule", appointments: currentUser["appointments"]});
     })
     .post(async (req, res) => {
         const currentUser = req.session.user;
@@ -15,7 +15,8 @@ router
         try{
             await instructorData.updateAppointmentsAndAllowTimes(id, currentUser["allowedTimes"], appointments);
             req.session.user = await instructorData.getInstructorById(id);
-            return res.status(200).render("./instructorSchedule", {title: "Schedule"});
+            console.log(currentUser["appointments"]);
+            return res.status(200).render("./instructorSchedule", {title: "Schedule", appointments: currentUser["appointments"]});
         }catch(e){
             console.log(e);
         }

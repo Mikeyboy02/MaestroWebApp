@@ -64,11 +64,15 @@ const exportedMethods = {
     return await this.getInstructorById(Id);
   },
   async updateAppointmentsAndAllowTimes(Id, allowedTimes, appointments) {
-    let updatedInstructor = {
-      allowedTimes: allowedTimes,
-      appointments: appointments
-    };
     const user = await this.getInstructorById(Id);
+    console.log(user);
+    let newAppts = user.appointments.concat([appointments]);
+    //console.log(newAppts);
+    let newAllowed = user.allowedTimes.concat([allowedTimes]);
+    let updatedInstructor = {
+      allowedTimes: newAllowed,
+      appointments: newAppts
+    };
     //check updated parameters, if they were updated
 
     //update user
