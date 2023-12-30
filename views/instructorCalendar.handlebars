@@ -20,8 +20,9 @@
     <button type="submit">Submit</button>
     </form>
     <div id="appointmentDiv">
+        Time
         {{#each appointments}}
-        <li>Time: {{this}}</li>
+        <li id="testTime"> {{this}}</li>
         {{/each}}
     </div>
     <script>
@@ -29,6 +30,7 @@
         // var title = document.getElementById("title").value;
         // var start = document.getElementById("start").value;
         // var end = document.getElementById("end").value;
+        
         var eventData = {
             title: name,
             start: startTime,
@@ -41,7 +43,9 @@
             // Calendar options and events will be added here
                 displayEventEnd: true
         });
-        addEvent("test", "2023-12-18T10:00:00", "2023-12-18T18:00:00")
+        var start = document.getElementById("testTime").textContent;
+        console.log(start);
+        addEvent("test", start, "2023-12-19T18:00:00")
     });
 
 
