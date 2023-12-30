@@ -27,7 +27,7 @@ router
       try{
         req.session.user = await instructorData.authenicateInstructor(email, pass);
         console.log("done");
-        return res.status(200).redirect("/instructors/schedule");
+        return res.status(200).redirect("/instructors/calendar");
       }catch(e){
         console.log(e);
       }

@@ -66,9 +66,15 @@ const exportedMethods = {
   async updateAppointmentsAndAllowTimes(Id, allowedTimes, appointments) {
     const user = await this.getInstructorById(Id);
     console.log(user);
-    let newAppts = user.appointments.concat([appointments]);
+    let newAppts = user.appointments;
+    if(appointments.length !== 0){
+      newAppts = user.appointments.concat([appointments]);
+    }
     //console.log(newAppts);
-    let newAllowed = user.allowedTimes.concat([allowedTimes]);
+    let newAllowed = user.allowedTimes;
+    if(Object.keys(allowedTimes).length !==0){
+      newAllowed = user.allowedTimes.concat([allowedTimes]);
+    }
     let updatedInstructor = {
       allowedTimes: newAllowed,
       appointments: newAppts
