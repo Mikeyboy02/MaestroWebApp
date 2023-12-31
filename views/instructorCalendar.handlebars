@@ -2,10 +2,49 @@
 <html>
 <head>
     <title>Instructor Schedule</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script> --}}
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.10/index.global.min.js"></script> --}}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            displayEventEnd: true,
+            events: [
+                { title: 'Meeting', start: new Date() }
+            ],
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              },
+              // customize the button names,
+              // otherwise they'd all just say "list"
+              views: {
+                dayGridMonth: { buttonText: 'month' },
+                timeGridWeek: { buttonText: 'week' },
+                timeGridDay: { buttonText: 'day' }
+              },
+              eventClick: function(info) {
+                alert('Event: ' + info.event.title);
+                alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                alert('View: ' + info.view.type);
+            
+                // change the border color just for fun
+                info.el.style.borderColor = 'red';
+              }
+        });
+        calendar.render();
+      });
+
+    </script>
 </head>
 <body>
     <h1>Instructor Schedule</h1>
@@ -25,19 +64,43 @@
         <li id="testTime"> {{this}}</li>
         {{/each}}
     </div>
-    <script>
-        function addEvent(name, startTime, endTime) {
+    {{!-- <script>
+        function eventObjectWithEnd(name, startTime, endTime) {
         // var title = document.getElementById("title").value;
         // var start = document.getElementById("start").value;
         // var end = document.getElementById("end").value;
         
-        var eventData = {
-            title: name,
-            start: startTime,
-            end: endTime,
-        };
-        $('#calendar').fullCalendar('renderEvent', eventData);
-    }
+        var eventData = new Calendar(newCal, {
+            events: [
+                {
+                    title: name,
+                    start: startTime,
+                    end: endTime,
+                }
+            ],
+
+        });
+        return eventData;
+        //$('#calendar').fullCalendar('renderEvent', eventData);
+        }
+        function eventObject(name, startTime) {
+        // var title = document.getElementById("title").value;
+        // var start = document.getElementById("start").value;
+        // var end = document.getElementById("end").value;
+        
+        var eventData = new Calendar(newCal, {
+            events: [
+                {
+                    title: name,
+                    start: startTime,
+                    allDay: false,
+                }
+            ],
+
+        });
+        return eventData;
+        //$('#calendar').fullCalendar('renderEvent', eventData);
+        }
     $(document).ready(function() {
         $('#calendar').fullCalendar({
             // Calendar options and events will be added here
@@ -45,11 +108,11 @@
         });
         var start = document.getElementById("testTime").textContent;
         console.log(start);
-        addEvent("test", start, "2023-12-19T18:00:00")
+        $('#calendar').fullCalendar('addEvent', eventObject("test", start));
     });
 
 
         
-    </script>
+    </script> --}}
 </body>
 </html>
