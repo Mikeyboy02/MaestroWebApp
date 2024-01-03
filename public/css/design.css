@@ -4,25 +4,25 @@ body {
 }
 ​
 .header {
-    position: fixed;
-    width: 100%;
+    
+    width: 100vw;
     height: 10%;
     background-color: #F4CF08;
 }
 ​
-.logo-container {
+/* .logo-container {
     height: 100%;
     width: 5%;
     background-color: #000000;
     display: flex;
     align-items: center;
 }
-​
-.logo img {
-    height: 75%;
-    width: 75%;
-    margin: auto;
-    display: block;
+​ */
+#Maestrologo {
+    height:9%; 
+    width:9%; 
+    padding-left:0.5%; 
+    padding-top:0.5%
 }
 
 #header {
