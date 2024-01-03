@@ -19,15 +19,14 @@ body {
 }
 ​ */
 #Maestrologo {
-    height:9%; 
-    width:9%; 
+
     padding-left:0.5%; 
     padding-top:0.5%
 }
 
 #header {
     background-color: #F4CF08;
-    height: 150px;
+    height: 10%;
     width: 100vw;
 }
 
