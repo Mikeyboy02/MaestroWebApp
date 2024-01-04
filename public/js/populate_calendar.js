@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    axios.get()
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
@@ -30,4 +31,3 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
   });
 
-  
