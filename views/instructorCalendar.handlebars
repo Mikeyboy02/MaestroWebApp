@@ -17,12 +17,12 @@
         Make Appointment:
     <input type="datetime-local" name="apptInput" id="apptInput" class="full-width-input">
     <br>
-    <button type="submit">Submit</button>
+    <button onClick="window.location.reload();" type="submit">Submit</button>
     </form>
     <div id="appointmentDiv">
         Time
         {{#each appointments}}
-        <li id="testTime"> {{this}}</li>
+        <li class="testTime"> {{this}}</li>
         {{/each}}
     </div>
     <script>
@@ -43,9 +43,14 @@
             // Calendar options and events will be added here
                 displayEventEnd: true
         });
-        var start = document.getElementById("testTime").textContent;
-        console.log(start);
-        addEvent("test", start, "2023-12-19T18:00:00")
+        var items = document.getElementsByClassName("testTime");
+        for(var i = 0; i<items.length;i++){
+            var item = items[i].textContent;
+            console.log(item);
+            addEvent("test", item, "2023-12-19T18:00:00")
+        }
+        //var start = document.getElementById("testTime").textContent;
+        
     });
 
 
