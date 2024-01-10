@@ -32,36 +32,5 @@
         <li class="testTime"> {{this}}</li>
         {{/each}}
     </div>
-    <script>
-        function addEvent(name, startTime, endTime) {
-        // var title = document.getElementById("title").value;
-        // var start = document.getElementById("start").value;
-        // var end = document.getElementById("end").value;
-        
-        var eventData = {
-            title: name,
-            start: startTime,
-            end: endTime,
-        };
-        $('#calendar').fullCalendar('renderEvent', eventData);
-    }
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            // Calendar options and events will be added here
-                displayEventEnd: true
-        });
-        var items = document.getElementsByClassName("testTime");
-        for(var i = 0; i<items.length;i++){
-            var item = items[i].textContent;
-            console.log(item);
-            addEvent("test", item, "2023-12-19T18:00:00")
-        }
-        //var start = document.getElementById("testTime").textContent;
-        
-    });
-
-
-        
-    </script>
 </body>
 </html>
