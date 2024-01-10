@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {{!-- <link rel="stylesheet" href="../public/css/design.css"> --}}
     <title>Instructor Schedule</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script> --}}
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src='../public/js/populate_calendar.js'></script>
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.10/index.global.min.js"></script> --}}
 </head>
 <body>
     <h1>Instructor Schedule</h1>
-    <div id="instructor-schedule">
+    <div id="instructor-schedule" style="margin: 0px 10px 50px; margin">
         <div id="calendar"></div>
     </div>
-    <a href="/instructors/schedule">Click here to Schedule an Appointment</a>
+    <a href="/instructors/schedule" >Click here to Schedule an Appointment</a>
     <form action="/instructors/calendar" method="post" id="delete-form">
         Make Appointment:
     <input type="datetime-local" name="apptInput" id="apptInput" class="full-width-input">
