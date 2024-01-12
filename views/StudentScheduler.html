@@ -53,18 +53,24 @@
 
     <label for="instructor">Instructor:</label>
     <select id="instructor" name="instructor" required>
+      <!-- These options need to be pulled from all instructors as they will be options-->
         <option value="instructor1">Instructor 1</option>
         <option value="instructor2">Instructor 2</option>
         <option value="instructor3">Instructor 3</option>
     </select>
-
+<!-- tnis below needs to be populated after the instructor is picked so that it shows the allowedTimes feature -->
     <label for="date">Date:</label>
     <input type="date" id="date" name="date" required>
     
     <label for="time">Time:</label>
     <input type="time" id="time" name="time" required>
-    
+    <!-- once the allowedTime is shown then for the first run(showing to John) we can have the 
+      person just choose a time that fits into those values shown with the date and time features 
+      above and have it be checked that those date and time values are inside the allowedTime -->
     <input type="submit" value="Schedule Appointment">
+<!-- once submit is clicked then it should be added in database for that instructor in appointments 
+  feature and removed from allowedTime feature; then we could just restart and show him that it 
+  populates on the instructors calendar page -->
 
   </form>
 </body>
