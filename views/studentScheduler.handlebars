@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Appointment Scheduling</title>
+  <style>
+    form {
+        /* Just to center the form on the page */
+        margin: 0 auto;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* To see the outline of the form */
+        padding: 1em;
+        border: 1px solid #CCC;
+        border-radius: 1em;
+    }
+    input, select {
+        margin-bottom: 1em;
+    }
+    input[type=time] {
+  border: none;
+  color: #2a2c2d;
+  font-size: 14px;
+  font-family: helvetica;
+  width: 180px;
+}
+  </style>
+  <link rel="stylesheet" href="../public/css/design.css">
+</head>
+<body>
+    <div id="header">
+        <img src="../2021maestroMUSIC.png" alt="logo" id="logo" style="height:140px; width:140px; padding-left:5px; padding-top:5px">
+        <!-- <button class="profile-button" onclick="location.href='profile.html'">Profile</button> -->
+    </div>
+  <h1>Appointment Scheduling</h1>
+  
+  <form action="/students/booking" method="post" id="studentBooking">
+  <p>You are booking with {{instructor}}</p>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="appointmentType">Appointment Type:</label>
+    <select id="appointmentType" name="appointmentType" required>
+        <option value="guitar">Guitar</option>
+        <option value="piano">Piano</option>
+        <option value="violin">Violin</option>
+    </select>
+{{!   Commeneted out the instructor and date since the allowed times includes dates
+        and you can only book with the one instructor}}
+    {{!-- <label for="instructor">Instructor:</label>
+    <select id="instructor" name="instructor" required>
+      <!-- These options need to be pulled from all instructors as they will be options-->
+        <option value="instructor1">Instructor 1</option>
+        <option value="instructor2">Instructor 2</option>
+        <option value="instructor3">Instructor 3</option>
+    </select> --}}
+<!-- tnis below needs to be populated after the instructor is picked so that it shows the allowedTimes feature -->
+    {{!-- <label for="date">Date:</label>
+    <input type="date" id="date" name="date" required> --}}
+    
+    <label for="time">Time:</label>
+    <select id="time" name="time" required>
+      {{#each allowedTimes}}
+      <option value="{{this}}">{{this}}</option>
+      {{/each}}
+    </select>
+    <!-- once the allowedTime is shown then for the first run(showing to John) we can have the 
+      person just choose a time that fits into those values shown with the date and time features 
+      above and have it be checked that those date and time values are inside the allowedTime -->
+    <input type="submit" value="Schedule Appointment">
+<!-- once submit is clicked then it should be added in database for that instructor in appointments 
+  feature and removed from allowedTime feature; then we could just restart and show him that it 
+  populates on the instructors calendar page -->
+
+  </form>
+</body>
+</html>

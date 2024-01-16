@@ -15,16 +15,23 @@
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.10/index.global.min.js"></script> --}}
 </head>
 <body>
+    <a href="/students/booking">Click here to see student booking view</a>
     <h1>Instructor Schedule</h1>
     <div id="instructor-schedule" style="margin: 0px 10px 50px; margin">
         <div id="calendar"></div>
     </div>
     <a href="/instructors/schedule" >Click here to Schedule an Appointment</a>
-    <form action="/instructors/calendar" method="post" id="delete-form">
+    <form action="/instructors/calendar" method="post" id="delete-form" hidden="true">
         Make Appointment:
     <input type="datetime-local" name="apptInput" id="apptInput" class="full-width-input">
     <br>
     <button onClick="window.location.reload();" type="submit">Submit</button>
+    </form>
+    <form action="/instructors/calendar" method="post" id="allowedTimesform">
+    Allow Time:
+    <input type="datetime-local" name="allowedTimesInput" id="allowedTimesInput">
+    <br>
+    <button type="submit">Submit</button>
     </form>
     <div id="appointmentDiv" hidden="true">
         Time
