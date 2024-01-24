@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         displayEventEnd: false,
+        //dragging on page
+        selectable: true,
+        dragScroll: true,
         // defaultTimedEventDuration: '01:00',
         forceEventDuration: true,
         events: [
