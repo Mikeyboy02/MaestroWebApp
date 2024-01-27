@@ -25,7 +25,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
             // change the border color just for fun
             info.el.style.borderColor = 'red';
+          },
+          select: function(info){
+            if (info.view.type == 'timeGridWeek' || info.view.type == 'timeGridDay') {
+              let addAvailability = confirm('Would you like to add the range ' + info.startStr + ' to ' + info.endStr + ' to your as your available times?');
+              if (addAvailability) {
+                let startString = info.startStr;
+                let endstring = info.endStr;
+                let startDate = new Date(startString);
+                let endDate = new Date(endstring);
+                while (startDate < endDate){
+                  addEvent("test", startDate, calendar);
+                  startDate.setHours(startDate.getHours() + 1);
+                  console.log(startDate);
+                  document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.getTime()}</li>`)
+                  console.log(startDate.getTime());
+                }
+              }
+            }
           }
+
     });
     var items = document.getElementsByClassName("testTime");
     for(var i = 0; i<items.length;i++){
