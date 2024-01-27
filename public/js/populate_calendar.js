@@ -25,11 +25,26 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           eventClick: function(info) {
             alert('Event: ' + info.event.title + '\n' + 'Start: ' + info.event.start + '\n' + 'End: ' + info.event.end + '\n');
-        
             // change the border color just for fun
             info.el.style.borderColor = 'red';
-          }
-    });
+          },
+          select: function(info){
+            if (info.view.type == 'timeGridWeek' || info.view.type == 'timeGridDay') {
+              let addAvailability = confirm('Would you like to add the range ' + info.startStr + ' to ' + info.endStr + ' to your as your available times?');
+              if (addAvailability) {
+                let startString = info.startStr;
+                let endstring = info.endStr;
+                let startDate = new Date(startString);
+                let endDate = new Date(endstring);
+                while (startDate < endDate){
+                  addEvent("test", startDate, calendar);
+                  startDate.setHours(startDate.getHours() + 1);
+                  console.log(startDate);
+                }
+              }
+            }
+          }    
+        });
     var items = document.getElementsByClassName("testTime");
     for(var i = 0; i<items.length;i++){
         var item = items[i].textContent;
