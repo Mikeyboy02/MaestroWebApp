@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 while (startDate < endDate){
                   addEvent("test", startDate, calendar);
                   startDate.setHours(startDate.getHours() + 1);
-                  console.log(startDate);
+                  document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.getTime()}</li>`)
+                  console.log(startDate.getTime());
                 }
               }
             }
