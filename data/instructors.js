@@ -67,12 +67,12 @@ const exportedMethods = {
     const user = await this.getInstructorById(Id);
     console.log(user);
     let newAppts = user.appointments;
-    if(appointments.length !== 0){
+    if(appointments !== undefined && appointments.length !== 0){
       newAppts = user.appointments.concat([appointments]);
     }
     //console.log(newAppts);
     let newAllowed = user.allowedTimes;
-    if(Object.keys(allowedTimes).length !==0){
+    if(allowedTimes !== undefined && allowedTimes.length !==0){
       newAllowed = user.allowedTimes.concat([allowedTimes]);
     }
     let updatedInstructor = {
@@ -92,6 +92,30 @@ const exportedMethods = {
     //   throw `Could not update user with id ${Id}.`;
     // }
     return await this.getInstructorById(Id);
+  },
+
+  async removeAllowedTime(Id, allowedTime){
+    const user = await this.getInstructorById(Id);
+    let allowed = user.allowedTimes;
+    if(allowed.includes(allowedTime)){
+      const index = allowed.indexOf(allowedTime);
+      let removed = allowed.splice(index, 1);
+    }
+    let updatedInstructor = {
+      allowedTimes: allowed,
+    };
+
+    const instructorCollection = await instructors();
+    const updateInfo = await instructorCollection.findOneAndUpdate(
+      {_id: new ObjectId(Id)},
+      {$set: updatedInstructor},
+      {returnDocument: 'after'}
+    );
+    // if (updateInfo.lastErrorObject.n === 0) {
+    //   throw `Could not update user with id ${Id}.`;
+    // }
+    return await this.getInstructorById(Id);
+
   },
 
   async deleteInstructor(Id){
