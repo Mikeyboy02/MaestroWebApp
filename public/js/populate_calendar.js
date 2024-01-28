@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   startDate.setHours(startDate.getHours() + 1);
                   document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.toISOString()}</li>`);
                 }
+                calendar.render();
               }
             }
           }    
