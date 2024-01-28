@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Profile Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="../public/css/design.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            height: 140px;
+            width: 140px;
+            padding-left: 5px;
+            padding-top: 5px;
+        }
+
+        .dashboard-container {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .welcome-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-section {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .profile-picture {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .profile-info {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .info-details {
+            flex-grow: 1;
+        }
+
+        .notes-box {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <img src="../2021maestroMUSIC.png" alt="logo" id="logo">
+        <h1>Student Profile Dashboard</h1>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="welcome-message">
+            Welcome, [Student Name]!
+        </div>
+
+        <div class="dashboard-section">
+            <h2>General Information</h2>
+            <div class="profile-info">
+                <img class="profile-picture" src="[ProfilePictureURL]" alt="Profile Picture">
+                <div class="info-details">
+                    <p><strong>Name:</strong> [Name]</p>
+                    <p><strong>Pronouns:</strong> [Pronouns]</p>
+                    <p><strong>Age:</strong> [Age]</p>
+                    <!-- Add more general information fields as needed -->
+                </div>
+            </div>
+            <div class="notes-box">
+                <h3>Notes:</h3>
+                <p>Add your notes or information here.</p>
+            </div>
+        </div>
+        <div class="dashboard-section">
+            <h2>Parent/Guardian Contact Details</h2>
+            <div class="profile-info">
+                <div class="info-details">
+                    <p><strong>Parent/Guardian Name:</strong> [Parent/Guardian Name]</p>
+                    <p><strong>Email:</strong> [Email]</p>
+                    <p><strong>Phone:</strong> [Phone]</p>
+                    <p><strong>Address:</strong> [Address]</p>
+                    <!-- Add more contact details fields as needed -->
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-section">
+            <h2>Upcoming Lessons</h2>
+            <div class="profile-info">
+                <div class="info-details">
+                    <p><strong>Date:</strong> [Date]</p>
+                    <p><strong>Instructor:</strong> [Instructor]</p>
+                    <p><strong>Paid:</strong> [Paid]</p>
+                    <p><strong>Location:</strong> [Location]</p>
+                    <!-- Add more information fields as needed -->
+                </div>
+            </div>
+            <div class="notes-box">
+                <h3>Notes:</h3>
+                <p>Add your notes or information here.</p>
+            </div>
+        </div>
+        
+        <div class="dashboard-section">
+            <h2>Past Lessons</h2>
+            <div class="profile-info">
+                <div class="info-details">
+                    <p><strong>Date:</strong> [Date]</p>
+                    <p><strong>Instructor:</strong> [Instructor]</p>
+                    <p><strong>Location:</strong> [Location]</p>
+                    <!-- Add more information fields as needed -->
+                </div>
+            </div>
+            <div class="notes-box">
+                <h3>Notes:</h3>
+                <p>Add your notes or information here.</p>
+            </div>
+        </div>
+        </div>      
+        <!-- Other dashboard sections go here -->
+
+    </div>
+
+</body>
+</html>
