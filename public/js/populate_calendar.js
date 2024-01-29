@@ -40,19 +40,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 while (startDate < endDate){
                   addEvent("test", startDate, calendar);
                   startDate.setHours(startDate.getHours() + 1);
-                  document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.toISOString()}</li>`);
+                  document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime jsAdded"> ${startDate.toISOString()}</li>`);
                 }
-                //console.log(document.getElementById('allowedTimesDiv').getElementsByClassName('jsAdded').innerHTML)
-                // fetch ('/instructors/calendar', {
-                //   method: 'POST',
-                //   headers: {
-                //     'Content-Type': 'application/json'
-                //   },
-                //   body: JSON.stringify({
-                //     //apptInput: document.getElementById('appointmentDiv').innerHTML,
-                //     allowedTimesInput: document.getElementById('allowedTimesDiv').getElementsByClassName('jsAdded').innerHTML
-                //   })
-                // })
+                let addedAvailability = document.getElementsByClassName('jsAdded');
+                  fetch ('/process', {
+                    method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      //apptInput: document.getElementById('appointmentDiv').innerHTML,
+                      allowedTimesInput: addedAvailability
+                    })
+
+                  })
+                  console.log("fetched");
                 calendar.render();
               }
             }

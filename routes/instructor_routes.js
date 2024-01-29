@@ -1,6 +1,41 @@
 import {Router} from 'express'
-const router = Router()
+import express from 'express'
+const router = Router();
+const app = express();
 import instructorData from "../data/instructors.js";
+import { all } from 'axios';
+// const app = require('express');
+// const bodyParser = require('body-parser');
+
+// Middleware
+//router.use(bodyParser.json());
+app.put('/process', async (req, res) => {
+    console.log("process");
+    const currentUser = req.session.user;
+    let id = currentUser["_id"];
+    let appointments = req.body.apptInput;
+    let added_allowedTimes = req.body.allowedTimesInput;
+    if (added_allowedTimes != null){
+        for (add in added_allowedTimes){
+            allowedTimes = allowedTimes.concat(add.innerHTML);
+            console.log(add.innerHTML);
+        }
+    }
+    try{
+        await instructorData.updateAppointmentsAndAllowTimes(id, allowedTimes, appointments);
+        req.session.user = await instructorData.getInstructorById(id);
+        res.json({
+            status: 'success',
+            message: 'Data received successfully!'
+        });
+        return res.status(200).render("./instructorCalendar", {title: "Schedule", appointments: req.session.user["appointments"]});
+    }catch(e){
+        console.log(e);
+    }
+});
+app.listen(3000, () => {
+    console.log('Express server listening on port 3000');
+});
 
 router
     .route('/calendar')
