@@ -1,4 +1,4 @@
-const addEvent = new Event('addEvent');
+//const addEvent = new Event('addEvent');
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -42,6 +42,17 @@ document.addEventListener('DOMContentLoaded', function() {
                   startDate.setHours(startDate.getHours() + 1);
                   document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.toISOString()}</li>`);
                 }
+                //console.log(document.getElementById('allowedTimesDiv').getElementsByClassName('jsAdded').innerHTML)
+                // fetch ('/instructors/calendar', {
+                //   method: 'POST',
+                //   headers: {
+                //     'Content-Type': 'application/json'
+                //   },
+                //   body: JSON.stringify({
+                //     //apptInput: document.getElementById('appointmentDiv').innerHTML,
+                //     allowedTimesInput: document.getElementById('allowedTimesDiv').getElementsByClassName('jsAdded').innerHTML
+                //   })
+                // })
                 calendar.render();
               }
             }
