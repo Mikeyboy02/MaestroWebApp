@@ -1,7 +1,7 @@
 //const addEvent = new Event('addEvent');
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    let calendarEl = document.getElementById('calendar');
+    let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         displayEventEnd: false,
         //dragging on page
@@ -47,9 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }    
         });
-    var items = document.getElementsByClassName("testTime");
-    for(var i = 0; i<items.length;i++){
-        var item = items[i].textContent;
+    let calendarMO = document.getElementById('calendar-month');
+    let calendar2 = new FullCalendar.Calendar(calendarMO, {
+      initialView: 'dayGridMonth',
+      displayEventEnd: false,
+      forceEventDuration: true,
+      }); 
+    let items = document.getElementsByClassName("testTime");
+    for(let i = 0; i<items.length;i++){
+        let item = items[i].textContent;
         console.log(item);
         addEvent("test", item, calendar);
     }
@@ -59,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   function addEvent(name, startTime, calendar) {
-    var eventData = {
+    let eventData = {
       title: name,
       start: startTime,
       allDay: false
