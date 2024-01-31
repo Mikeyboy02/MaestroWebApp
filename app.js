@@ -46,3 +46,6 @@ app.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000/login');
 });
+
+//import userData from "./data/users.js";
+//await userData.createUser("Josh", "Prasad", "jprasad2@stevens.edu","6034935270" ,"password123", "student");
