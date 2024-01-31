@@ -1,6 +1,7 @@
 import {Router} from 'express'
 const router = Router()
 import instructorData from "../data/instructors.js";
+import userData from "../data/users.js"
 
 router
     .route('/calendar')

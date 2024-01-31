@@ -1,12 +1,12 @@
 import {ObjectId} from 'mongodb';
-import { instructors } from '../config/mongoCollections.js';
+import { users } from '../config/mongoCollections.js';
 import bcrypt from 'bcryptjs';
 
 const exportedMethods = {
 
   async getInstructorById(instructorId) {
 
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const searched = await instructorCollection.findOne({_id: new ObjectId(instructorId)});
     if(!searched) throw `No instructor with id ${instructorId} found.`;
     searched._id = searched._id.toString();
@@ -27,7 +27,7 @@ const exportedMethods = {
       allowedTimes : [],
       appointments : []
     }
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const insertInfo = await instructorCollection.insertOne(newInstructor);
     if(!insertInfo.acknowledged || !insertInfo.insertedId) {
       throw 'Could not create new user. Try again.';
@@ -52,7 +52,7 @@ const exportedMethods = {
     //check updated parameters, if they were updated
 
     //update user
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const updateInfo = await instructorCollection.findOneAndUpdate(
       {_id: new ObjectId(Id)},
       {$set: updatedInstructor},
@@ -82,7 +82,7 @@ const exportedMethods = {
     //check updated parameters, if they were updated
 
     //update user
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const updateInfo = await instructorCollection.findOneAndUpdate(
       {_id: new ObjectId(Id)},
       {$set: updatedInstructor},
@@ -105,7 +105,7 @@ const exportedMethods = {
       allowedTimes: allowed,
     };
 
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const updateInfo = await instructorCollection.findOneAndUpdate(
       {_id: new ObjectId(Id)},
       {$set: updatedInstructor},
@@ -119,7 +119,7 @@ const exportedMethods = {
   },
 
   async deleteInstructor(Id){
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const deleteInfo = await instructorCollection.findOneAndDelete(
       {_id: new ObjectId(Id)}
     );
@@ -127,7 +127,7 @@ const exportedMethods = {
   },
 
   async getInstructorByEmail(email){
-    const instructorCollection = await instructors();
+    const instructorCollection = await users();
     const searched = await instructorCollection.findOne({email: email});
     if (!searched) throw `No user with email ${email}`;
     return searched;

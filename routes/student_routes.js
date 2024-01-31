@@ -29,4 +29,11 @@ router
         }    
     }) 
 
+router
+    .route('/dashboard')
+    .get(async (req, res) => {
+        let currentUser = req.session.user;
+        res.render("../views/studentDashboard", {title: "Dashboard"})
+    })
+
 export default router
