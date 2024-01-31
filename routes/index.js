@@ -11,6 +11,7 @@ const constructorMethod = (app) => {
     app.use('*', (req, res) => {
 
     })
+    
 }
 
 export default constructorMethod
