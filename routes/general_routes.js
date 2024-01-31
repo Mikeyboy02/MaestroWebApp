@@ -1,6 +1,7 @@
 import {Router} from 'express'
 const router = Router()
 import instructorData from "../data/instructors.js";
+import userData from "../data/users.js"
 
 router.route('/').get(async (req, res) => {
   //homepage route will go here
@@ -25,7 +26,7 @@ router
       let email=req.body.emailInput;
       let pass = req.body.passInput;
       try{
-        req.session.user = await instructorData.authenicateInstructor(email, pass);
+        req.session.user = await userData.authenicateUser(email, pass);
         console.log("done");
         return res.status(200).redirect("/instructors/calendar");
       }catch(e){

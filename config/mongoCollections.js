@@ -14,4 +14,4 @@ const getCollectionFn = (collection) => {
 };
 
 // List of connections
-export const instructors = getCollectionFn('instructors');
+export const users = getCollectionFn('users');
