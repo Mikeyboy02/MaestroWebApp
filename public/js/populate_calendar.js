@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       displayEventEnd: false,
       forceEventDuration: true,
       }); 
+    calendar2.render();
     let items = document.getElementsByClassName("testTime");
     for(let i = 0; i<items.length;i++){
         let item = items[i].textContent;
