@@ -33,7 +33,10 @@ router
     .route('/dashboard')
     .get(async (req, res) => {
         let currentUser = req.session.user;
-        res.render("../views/studentDashboard", {title: "Dashboard"})
+        //console.log(currentUser)
+        res.render("../views/studentDashboard", {title: "Dashboard",
+    firstName: req.session.user.firstName,
+    lastName: req.session.user.lastName})
     })
 
 export default router

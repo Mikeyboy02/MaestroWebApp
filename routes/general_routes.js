@@ -11,9 +11,33 @@ router
     .route('/register')
     .get(async (req, res) => {
         //GET the register page
+        res.render("../views/signup", {title: "Signup"})
     })
     .post(async (req, res) => {
+      try {
+        let firstName = req.body.firstNameInput
+        let lastName = req.body.lastNameInput
+        let email = req.body.emailAddressInput
+        let mobile = req.body.mobileNumberInput
+        let password = req.body.passwordInput
+        let role = "student"
+        let parent = {email: req.body.parentEmailInput, number: req.body.parentNumberInput, password:""}
 
+        let newUser = await userData.createStudent(
+          firstName,
+          lastName,
+          email,
+          mobile,
+          password,
+          role,
+          parent
+        )
+        //console.log(newUser)
+        return res.status(200).redirect("/login")
+      } catch (e) {
+        console.log(e)
+        res.status(400).render("../views/signup", {title: "Signup", error: e})
+      }
     })
 
 router

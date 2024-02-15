@@ -1,0 +1,32 @@
+<h1>{{title}}</h1>
+
+<form action="/register" method="POST" id="signup-form">
+
+        <label for="firstNameInput" id="firstNameLabel">First Name: </label>
+        <input type="text" name="firstNameInput" id="firstNameInput" placeholder="Patrick" autocomplete="off"/>
+
+        <label for="lastNameInput" id="lastNameLabel">Last Name: </label>
+        <input type="text" name="lastNameInput" id="lastNameInput" placeholder="Hill" autocomplete="off"/>
+
+        <label for="emailAddressInput" id="emailLabel">Email: </label>
+        <input type="email" name="emailAddressInput" id="emailAddressInput" placeholder="email" autocomplete="off"/><br>
+
+        <label for="mobileNumberInput" id="mobileLabel">Mobile Phone: </label>
+        <input type="tel" name="mobileNumberInput" id="mobileNumberInput" placeholder="XXX-XXX-XXXX" autocomplete="off"/><br>
+
+        <label for="parentEmailInput" id="parentEmailLabel">Parent Email: </label>
+        <input type="email" name="parentEmailInput" id="parentEmailInput" placeholder="email" autocomplete="off"/><br>
+
+        <label for="parentNumberInput" id="parentNumberEmail">Parent Mobile: </label>
+        <input type="tel" name="parentNumberInput" id="parentNumberInput" placeholder="XXX-XXX-XXXX" autocomplete="off"/><br>
+
+        <label for="passwordInput" id="passwordLabel">Password: </label>
+        <input type="password" name="passwordInput" id="passwordInput" placeholder="password" autocomplete="off"/>
+
+        <label for="confirmPasswordInput" id="confirmPasswordLabel">Confirm Password: </label>
+        <input type="password" name="confirmPasswordInput" id="confirmPasswordInput" placeholder="confirm password" autocomplete="off"/>
+
+        <button type="submit">Create Account</button>
+</form>
+
+<div id="error" class="error">{{error}}</div>
