@@ -12,6 +12,35 @@ const exportedMethods = {
       searched._id = searched._id.toString();
       return searched;
     },
+
+    async createStudent( first, last, email, mobile, password, role, parent) {
+      password = await bcrypt.hash(password, 12);
+      let newUser
+
+      newUser = {
+        firstName: first,
+        lastName: last,
+        email: email,
+        phoneNumber: mobile,
+        password: password,
+        role: role,
+        parent: parent,
+        appointments: []
+      }
+
+      const userCollection = await users();
+      const insertInfo = await userCollection.insertOne(newUser);
+      if(!insertInfo.acknowledged || !insertInfo.insertedId) {
+        throw 'Could not create new user. Try again.';
+      }
+      const newId = insertInfo.insertedId.toString();
+      const user = await this.getUserById(newId);
+      return user;
+    },
+
+    async createInstructor( first, last, email, mobile, password, role) {
+
+    },
   
     async createUser(firstName, lastName, email, mobile, password, role) {
       //insert helpers for all parameters
@@ -29,6 +58,7 @@ const exportedMethods = {
           phoneNumber: mobile,
           password: password,
           role: role,
+          parent: {},
           appointments : []
         }
       }
