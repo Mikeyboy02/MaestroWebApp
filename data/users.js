@@ -2,7 +2,26 @@ import {ObjectId} from 'mongodb';
 import { users } from '../config/mongoCollections.js';
 import bcrypt from 'bcryptjs';
 
+import nodemailer from 'nodemailer';
+
+import dotenv from 'dotenv'
+dotenv.config({path: '.env'})
+const credentials = {
+    client_email: process.env.SERVICE_ACCOUNT_EMAIL,
+    private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY
+}
+
 const exportedMethods = {
+
+    async generatePassword() {
+      var password = ""
+      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      var passLength = 12
+      for (let i = 0; i < passLength; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length))
+      }
+      return password
+    },
 
     async getUserById(userId) {
   
@@ -28,6 +47,10 @@ const exportedMethods = {
         appointments: []
       }
 
+      let otpassword = await this.generatePassword()
+      newUser.parent.password = await bcrypt.hash(otpassword, 12)
+      newUser.parent.loggedIn = false 
+
       const userCollection = await users();
       const insertInfo = await userCollection.insertOne(newUser);
       if(!insertInfo.acknowledged || !insertInfo.insertedId) {
@@ -35,6 +58,35 @@ const exportedMethods = {
       }
       const newId = insertInfo.insertedId.toString();
       const user = await this.getUserById(newId);
+
+
+      /*loggedIn starts as false
+      when a parent logs in for the first time, bring to a change password page
+      then change loggedIn to true
+      */
+      
+      const mailOptions = {
+        from: credentials.client_email,
+        to: parent.email,
+        subject: 'TEST OTP',
+        text: 'Here is your one-time password to signin: ' + otpassword,
+      }
+      const mailTransport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+          user: credentials.client_email,
+          pass: credentials.private_key
+  }
+      })
+
+      mailTransport.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            return console.error('Failed to send mail:', err)
+        }
+        console.log('Message sent: %s', info.messageId)
+    })
+
       return user;
     },
 
@@ -124,19 +176,44 @@ const exportedMethods = {
     async getUserByEmail(email){
       const userCollection = await users();
       const searched = await userCollection.findOne({email: email});
-      if (!searched) throw `No user with email ${email}`;
+      if (!searched) 
+          throw `No user with email ${email}`;
+      return searched;
+    },
+
+    async getUserByParentEmail(email){
+      const userCollection = await users();
+      const searched = await userCollection.find({'parent.email': email})
+      if (!searched) 
+          throw `No parent with email ${email}`;
       return searched;
     },
     //authenitcate user for login
     async authenicateUser(email, password){
-      const user = await this.getUserByEmail(email);
-      const passwordMatch = await bcrypt.compare(password, user.password);
-      if(!passwordMatch){
-        throw `The email and password you have put in do not match`;
-      } else {
-        return user;
-      }
-  
+      const userCollection = await users();
+      const user = await userCollection.findOne({email: email});
+      const parent = await userCollection.findOne({'parent.email': email})
+      try {
+        if (!user && !parent)
+            throw "No user with that email"
+        if (user) {
+          const passwordMatch = await bcrypt.compare(password, user.password);
+          if(!passwordMatch){
+            throw `The email and password you have put in do not match`;
+          } else {
+            return {accessor: user.role, user: user};
+          }
+        }
+        else if (parent) {
+          const passwordMatch = await bcrypt.compare(password, parent.parent.password);
+          if(!passwordMatch) {
+            throw `The email and password you have put in do not match`;
+          } else {
+            return {accessor: "parent", user: parent};
+          }
+        }
+      } catch (e) {console.log(e)}
+      
     }
   
   

@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import instructorData from "../data/instructors.js";
 const router = Router()
+import studentData from "../data/students.js"
 
 router
     .route('/calendar')
@@ -37,6 +38,23 @@ router
         res.render("../views/studentDashboard", {title: "Dashboard",
     firstName: req.session.user.firstName,
     lastName: req.session.user.lastName})
+    })
+
+router
+    .route('/parent/updatePassword')
+    .get(async (req, res) => {
+        let currentUser = req.session.user;
+        res.render("../views/updatePassword", {title: "Update parent password"})
+    })
+    .post(async (req, res) => {
+        let currentUser = req.session.user
+        let pass = req.body.newPasswordInput
+        let confirmpass = req.body.confirmPasswordInput
+        console.log(pass)
+        let updated = await studentData.updateParentPassword(currentUser.parent.email, pass)
+    
+        req.session.user = updated
+        return res.status(200).redirect("/students/dashboard")
     })
 
 export default router

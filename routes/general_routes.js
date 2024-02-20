@@ -50,9 +50,20 @@ router
       let email=req.body.emailInput;
       let pass = req.body.passInput;
       try{
-        req.session.user = await userData.authenicateUser(email, pass);
+        console.log(pass)
+        let userInfo = await userData.authenicateUser(email, pass);
+        req.session.name = "maestroWebApp"
+        req.session.user = userInfo.user
+        console.log(userInfo)
         console.log("done");
-        return res.status(200).redirect("/instructors/calendar");
+        if (userInfo.accessor == "instructor")
+          return res.status(200).redirect("/instructors/calendar");
+        else if (userInfo.accessor == "student")
+          return res.status(200).redirect("/students/dashboard")
+        else if (userInfo.accessor == "parent" && req.session.user.parent.loggedIn == false)
+          return res.status(200).redirect("/students/parent/updatePassword")
+        else if (userInfo.accessor == "parent")
+          return res.status(200).redirect("/students/dashboard")
       }catch(e){
         console.log(e);
       }
