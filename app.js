@@ -40,6 +40,71 @@ app.use(rewriteUnsupportedBrowserMethods);
 app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+//start middleware******************************************************************
+
+app.use(async (req, res, next) => {
+  if (req.session.user) {
+    console.log("[" + new Date().toUTCString() + "]: " + req.method + " " + req.originalUrl + " (Authenticated User)")
+  }
+  else {
+    console.log("[" + new Date().toUTCString() + "]: " + req.method + " " + req.originalUrl + " (Non-Authenticated User)")
+  }
+  if (req.originalUrl != '/')
+    return next()
+  else {
+    if (req.session.user.role == 'instructor')
+      return res.redirect('/instructors/calendar')
+  }
+  return next()
+})
+
+app.use('/login', (req, res, next) => {
+  if (req.session.user)
+  {
+    if (req.session.user.role == 'instructor')
+        return res.redirect('/instructors/calendar')
+    if (req.session.user.role == 'student')
+        return res.redirect('/students/dashboard')
+  }
+  next()
+})
+
+app.use('/register', (req, res, next) => {
+  if (req.session.user)
+  {
+    if (req.session.user.role == 'instructor')
+        return res.redirect('/instructors/calendar')
+    if (req.session.user.role == 'student')
+        return res.redirect('/students/dashboard')
+  }
+  next()
+})
+
+app.use('/instructors/calendar', (req, res, next) => {
+  if (!req.session.user)
+    return res.redirect('/login')
+  else 
+  {
+    if (req.session.user.role == 'student')
+        return res.redirect('/students/dashboard')
+  }
+  next()
+})
+
+app.use('/students/dashboard', (req, res, next) => {
+  if (!req.session.user)
+    return res.redirect('/login')
+  else
+  {
+    if (req.session.user.role == 'instructor')
+      return res.redirect('/instructors/calendar')
+  }
+  next()
+})
+
+
+//end middleware*********************************************************************
+
 configRoutes(app);
 
 app.listen(3000, () => {
