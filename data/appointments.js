@@ -1,5 +1,6 @@
 import {ObjectId} from 'mongodb';
 import bcrypt from 'bcryptjs';
+import userData from 'users.js';
 
 const exportedMethods = {
 
@@ -11,6 +12,17 @@ const exportedMethods = {
     instructor:instructorName, 
     date: Date,
     time:Time
+  };
+  return newAppt;
+ },
+ async createApptType(instructorId, instructorName, date, time, instrument, duration){
+  const newAppt = {
+    instructorId: instructorId,
+    instructorName: instructorName,
+    date: date,
+    time: time,
+    duration: duration,
+    instrument: instrument
   };
   return newAppt;
  }
