@@ -62,6 +62,21 @@
       align-items: center;
       margin-bottom: 15px;
     }
+
+    .calendar {
+      font-family: Arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .calendar th,
+    .calendar td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+      width: calc(100% / 7);
+      word-wrap: break-word;
+    }
   </style>
 </head>
 <body>
@@ -73,7 +88,7 @@
     Welcome, [Instructor Name]!
   </div>
   <div id="main-content">
-    <div width="25%">
+    <div width="50%">
       <div class="section">
         <h2>General Information</h2>
         <div class="profile-info">
@@ -99,10 +114,31 @@
         </div>
       </div>
     </div>
-    <div width="75%">
+    <div width="50%">
       <div class="section">
-        <h2>Your Lesson Availability</h2>
-        <!-- Put a Calendar Here???? (Just one week so that we can display their scheduled times)-->
+        <h2>Your Weekly Lesson Schedule</h2>
+          <table class="calendar">
+            <thead>
+              <tr>
+                <th>Sunday</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+              </tr>
+            </thead>
+            <tr>
+              <th> </th>
+              <th>4:00 PM - 5:00 PM - Trumpet - Home</th>
+              <th>2:15 PM - 3:00 PM - Piano - Hoboken High School: R228 </th>
+              <th>9:00 AM - 9:30 AM </th>
+              <th>2:15 PM - 3:00 PM - Piano - Hoboken High School: R228 </th>
+              <th>4:00 PM - 5:00 PM - Trumpet - Home</th>
+              <th></th>
+            </tr>
+          </table>
       </div>
     </div>
   </div>
