@@ -17,8 +17,12 @@
 <body>
     <a href="/students/booking">Click here to see student booking view</a>
     <h1>Instructor Schedule</h1>
-    <div id="instructor-schedule" style="margin: 0px 10px 50px; margin">
-        <div id="calendar"></div>
+    <div id="full-page" style="display:flex; width: 100vw; height: 100vh">
+        <div id="month-schedule" style="margin: 0px 10px 50px; width:33%">
+            <div id="calendar-month"></div>
+        </div><div id="instructor-schedule" style="margin: 0px 10px 50px; width:66%">
+            <div id="calendar"></div>
+    </div>
     </div>
     <a href="/instructors/schedule" >Click here to Schedule an Appointment</a>
     <form action="/instructors/calendar" method="post" id="delete-form" hidden="true">

@@ -1,7 +1,7 @@
 //const addEvent = new Event('addEvent');
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    let calendarEl = document.getElementById('calendar');
+    let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         displayEventEnd: false,
         //dragging on page
@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           select: function(info){
             if (info.view.type == 'timeGridWeek' || info.view.type == 'timeGridDay') {
-              let addAvailability = confirm('Would you like to add the range ' + info.startStr + ' to ' + info.endStr + ' to your as your available times?');
-              if (addAvailability) {
+              let returned_value = prompt('This is the current date range selected: ' + info.startStr + ' to ' + info.endStr + '\n What instrument would you like to add availability for?');
+              if (returned_value !== null || returned_value !== "") {
                 let startString = info.startStr;
                 let endstring = info.endStr;
                 let startDate = new Date(startString);
                 let endDate = new Date(endstring);
                 while (startDate < endDate){
-                  addEvent("test", startDate, calendar);
+                  addEvent(returned_value, startDate, calendar);
                   startDate.setHours(startDate.getHours() + 1);
                   document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.toISOString()}</li>`);
                 }
@@ -47,9 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }    
         });
-    var items = document.getElementsByClassName("testTime");
-    for(var i = 0; i<items.length;i++){
-        var item = items[i].textContent;
+    let calendarMO = document.getElementById('calendar-month');
+    let calendar2 = new FullCalendar.Calendar(calendarMO, {
+      initialView: 'dayGridMonth',
+      displayEventEnd: false,
+      forceEventDuration: true,
+      }); 
+    calendar2.render();
+    let items = document.getElementsByClassName("testTime");
+    for(let i = 0; i<items.length;i++){
+        let item = items[i].textContent;
         console.log(item);
         addEvent("test", item, calendar);
     }
@@ -59,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   function addEvent(name, startTime, calendar) {
-    var eventData = {
+    let eventData = {
       title: name,
       start: startTime,
       allDay: false
