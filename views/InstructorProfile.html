@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instructor Profile</title>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+  <script src='../public/js/populate_calendar.js'></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -84,11 +86,11 @@
     <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo" style="height:140px; width:140px; padding: 5px">
     <h1>Instructor Profile</h1>
   </div>
-  <div id="welcome-message" width="100%">
+  <div id="welcome-message" style="width: 100%; padding: 10px">
     Welcome, [Instructor Name]!
   </div>
   <div id="main-content">
-    <div width="50%">
+    <div style="width: 39%">
       <div class="section">
         <h2>General Information</h2>
         <div class="profile-info">
@@ -114,7 +116,7 @@
         </div>
       </div>
     </div>
-    <div width="50%">
+    <div style="width: 59%">
       <div class="section">
         <h2>Your Weekly Lesson Schedule</h2>
           <table class="calendar">
