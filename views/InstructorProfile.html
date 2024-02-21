@@ -26,12 +26,85 @@
       padding-left: 5px;
       padding-top: 5px;
     }
+
+    #main-content {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .half-screen {
+      width: 50%;
+    }
+
+    #welcome-message {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+    }
+    .profile-picture {
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .profile-info {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
   <div id="header">
     <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo" style="height:140px; width:140px; padding: 5px">
     <h1>Instructor Profile</h1>
+  </div>
+  <div id="welcome-message" width="100%">
+    Welcome, [Instructor Name]!
+  </div>
+  <div id="main-content">
+    <div width="25%">
+      <div class="section">
+        <h2>General Information</h2>
+        <div class="profile-info">
+          <img class="profile-picture" src="[ProfilePictureURL]" alt="Profile Picture">
+        </div>
+        <div class="info-details">
+          <p><strong>Name:</strong> <input type="dropdown" id="name"></p>
+          <p><strong>Pronouns:</strong> <input type="text" id="pronouns"></p>
+          <p><strong>Age:</strong> <input type="text" id="age"></p>
+          <p><strong>Email:</strong> <input type="email" id="parentEmail"></p>
+          <p><strong>Phone:</strong> <input type="tel" id="parentPhone"></p>
+          <p><strong>Address:</strong> <input type="text" id="parentAddress"></p>
+          <!-- Add more general information fields as needed -->
+        </div>
+      </div>
+      <div class="section">
+        <h2>Teaching Information</h2>
+        <div class="info-details">
+          <p><strong>Organizations:</strong> <input type="dropdown" id="name"></p>
+          <p><strong>Instruments:</strong> <input type="text" id="pronouns"></p>
+          <p><strong>Locations:</strong> <input type="text" id="age"></p>
+          <!-- Add more general information fields as needed -->
+        </div>
+      </div>
+    </div>
+    <div width="75%">
+      <div class="section">
+        <h2>Your Lesson Availability</h2>
+        <!-- Put a Calendar Here???? (Just one week so that we can display their scheduled times)-->
+      </div>
+    </div>
   </div>
 
 
