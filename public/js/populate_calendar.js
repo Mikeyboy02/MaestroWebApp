@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           select: function(info){
             if (info.view.type == 'timeGridWeek' || info.view.type == 'timeGridDay') {
-              let addAvailability = confirm('Would you like to add the range ' + info.startStr + ' to ' + info.endStr + ' to your as your available times?');
-              if (addAvailability) {
+              let returned_value = prompt('This is the current date range selected: ' + info.startStr + ' to ' + info.endStr + '\n What instrument would you like to add availability for?');
+              if (returned_value !== null || returned_value !== "") {
                 let startString = info.startStr;
                 let endstring = info.endStr;
                 let startDate = new Date(startString);
                 let endDate = new Date(endstring);
                 while (startDate < endDate){
-                  addEvent("test", startDate, calendar);
+                  addEvent(returned_value, startDate, calendar);
                   startDate.setHours(startDate.getHours() + 1);
                   document.getElementById('appointmentDiv').insertAdjacentHTML('beforeEnd',`<li class="testTime"> ${startDate.toISOString()}</li>`);
                 }
