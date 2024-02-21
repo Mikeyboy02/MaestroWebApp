@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" class=""><head>
     <title>Student Profile Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
@@ -17,7 +16,7 @@
         }
 
         #header {
-            background-color: #f4cf08;
+            background-color: #ffee00;
             color: #fff;
             padding: 15px;
             text-align: center;
@@ -35,11 +34,17 @@
         .dashboard-container {
             padding: 20px;
             flex: 1;
+            display: flex; /* Added to arrange content horizontally */
+            justify-content: space-between; /* Added to space items evenly */
         }
 
         .welcome-message {
             font-size: 24px;
             margin-bottom: 20px;
+        }
+
+        .dashboard-content {
+            width: 50%;
         }
 
         .dashboard-section {
@@ -68,14 +73,33 @@
             flex-grow: 1;
         }
 
+        /* Adjusted the width of the notes-box */
         .notes-box {
-            width: 100%;
+            width: 90%; /* Reduced width */
             border: 1px solid #ddd;
             padding: 10px;
             border-radius: 5px;
         }
+
+        /* Updated styles for the right side box */
+        .schedule-appointment {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            width: 50%; /* Adjusted width to 100% */
+        }
+
+        .schedule-appointment h2 {
+            margin-top: 0;
+        }
+
+        .schedule-appointment p {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
+
 <body>
 
     <header id="header">
@@ -84,74 +108,85 @@
     </header>
 
     <div class="dashboard-container">
-        <div class="welcome-message">
-            Welcome, {{firstName}}!
+        <div class="dashboard-content">
+            <div class="welcome-message">
+                Welcome, [Student Name]!
+            </div>
+
+            <div class="dashboard-section">
+                <h2>General Information</h2>
+                <div class="profile-info">
+                    <img class="profile-picture" src="[ProfilePictureURL]" alt="Profile Picture">
+                    <div class="info-details">
+                        <p><strong>Name:</strong> <input type="text" id="name"></p>
+                        <p><strong>Pronouns:</strong> <input type="text" id="pronouns"></p>
+                        <p><strong>Age:</strong> <input type="text" id="age"></p>
+                        <!-- Add more general information fields as needed -->
+                    </div>
+                </div>
+                <div class="notes-box">
+                    <h3>Notes:</h3>
+                    <textarea id="notes" rows="4" cols="50" style="width: 374px; height: 56px;">Add your notes or information here.</textarea>
+                </div>
+            </div>
+            <div class="dashboard-section">
+                <h2>Parent/Guardian Contact Details</h2>
+                <div class="profile-info">
+                    <div class="info-details">
+                        <p><strong>Parent/Guardian Name:</strong> <input type="text" id="parentName"></p>
+                        <p><strong>Email:</strong> <input type="email" id="parentEmail"></p>
+                        <p><strong>Phone:</strong> <input type="tel" id="parentPhone"></p>
+                        <p><strong>Address:</strong> <input type="text" id="parentAddress"></p>
+                        <!-- Add more contact details fields as needed -->
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-section">
+                <h2>Upcoming Lessons</h2>
+                <div class="profile-info">
+                    <div class="info-details">
+                        <p><strong>Date:</strong><input type="text" id="Date"></p>
+                        <p><strong>Instructor:</strong><input type="text" id="nameInstructor"></p>
+                        <p><strong>Paid:</strong><input type="text" id="Paid"></p>
+                        <p><strong>Location:</strong><input type="text" id="Location"></p>
+                        <!-- Add more information fields as needed -->
+                    </div>
+                </div>
+                <div class="notes-box">
+                    <h3>Notes:</h3>
+                    <textarea id="notes" rows="4" cols="50" style="width: 373px; height: 61px;">Add your notes or information here.</textarea>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Past Lessons</h2>
+                <div class="profile-info">
+                    <div class="info-details">
+                        <p><strong>Date:</strong>
+<input type="text" id="Date"></p>
+                        <p><strong>Instructor:</strong>
+<input type="text" id="InstructorName"></p>
+                        <p><strong>Location:</strong>
+<input type="text" id="Location"></p>
+                        <!-- Add more information fields as needed -->
+                    </div>
+                </div>
+                <div class="notes-box">
+                    <h3>Notes:</h3>
+                    <textarea id="notes" rows="4" cols="50" style="width: 372px; height: 73px;">Add your notes or information here.</textarea>
+                </div>
+            </div>
         </div>
 
-        <div class="dashboard-section">
-            <h2>General Information</h2>
-            <div class="profile-info">
-                <img class="profile-picture" src="[ProfilePictureURL]" alt="Profile Picture">
-                <div class="info-details">
-                    <p><strong>Name:</strong> {{firstName}} {{lastName}}</p>
-                    <p><strong>Pronouns:</strong> [Pronouns]</p>
-                    <p><strong>Age:</strong> [Age]</p>
-                    <!-- Add more general information fields as needed -->
-                </div>
-            </div>
-            <div class="notes-box">
-                <h3>Notes:</h3>
-                <p>Add your notes or information here.</p>
-            </div>
+        <!-- Right side box for scheduling appointment -->
+        <div class="schedule-appointment">
+            <h2>Schedule an Appointment</h2>
+            <p>Click <a href="http://localhost:3000/students/booking">here</a> to schedule an appointment.</p>
         </div>
-        <div class="dashboard-section">
-            <h2>Parent/Guardian Contact Details</h2>
-            <div class="profile-info">
-                <div class="info-details">
-                    <p><strong>Parent/Guardian Name:</strong> [Parent/Guardian Name]</p>
-                    <p><strong>Email:</strong> [Email]</p>
-                    <p><strong>Phone:</strong> [Phone]</p>
-                    <p><strong>Address:</strong> [Address]</p>
-                    <!-- Add more contact details fields as needed -->
-                </div>
-            </div>
-        </div>
-        <div class="dashboard-section">
-            <h2>Upcoming Lessons</h2>
-            <div class="profile-info">
-                <div class="info-details">
-                    <p><strong>Date:</strong> [Date]</p>
-                    <p><strong>Instructor:</strong> [Instructor]</p>
-                    <p><strong>Paid:</strong> [Paid]</p>
-                    <p><strong>Location:</strong> [Location]</p>
-                    <!-- Add more information fields as needed -->
-                </div>
-            </div>
-            <div class="notes-box">
-                <h3>Notes:</h3>
-                <p>Add your notes or information here.</p>
-            </div>
-        </div>
-        
-        <div class="dashboard-section">
-            <h2>Past Lessons</h2>
-            <div class="profile-info">
-                <div class="info-details">
-                    <p><strong>Date:</strong> [Date]</p>
-                    <p><strong>Instructor:</strong> [Instructor]</p>
-                    <p><strong>Location:</strong> [Location]</p>
-                    <!-- Add more information fields as needed -->
-                </div>
-            </div>
-            <div class="notes-box">
-                <h3>Notes:</h3>
-                <p>Add your notes or information here.</p>
-            </div>
-        </div>
-        </div>      
-        <!-- Other dashboard sections go here -->
-
     </div>
+    <!-- Other dashboard sections go here -->
 
-</body>
-</html>
+
+
+
+</body></html>
