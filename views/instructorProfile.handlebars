@@ -6,85 +6,12 @@
   <title>Instructor Profile</title>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
   <script src='../public/js/profile_calendar.js'></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #header {
-      background-color: #ffee00;
-      text-align: center;
-      display: flex;
-      align-items: center;
-    }
-
-    #logo {
-      height: 140px;
-      width: 140px;
-      padding-left: 5px;
-      padding-top: 5px;
-    }
-
-    #main-content {
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .half-screen {
-      width: 50%;
-    }
-
-    #welcome-message {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .section {
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
-    }
-    .profile-picture {
-      max-width: 100px;
-      max-height: 100px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-
-    .profile-info {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .calendar {
-      font-family: Arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    .calendar th,
-    .calendar td {
-      border: 1px solid #dddddd;
-      text-align: center;
-      padding: 8px;
-      width: calc(100% / 7);
-      word-wrap: break-word;
-    }
-  </style>
+  <link rel="stylesheet" href="../public/css/instructorProfile.css">
 </head>
 <body>
   <div id="header">
-    <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo" style="height:140px; width:140px; padding: 5px">
-    <h1>Instructor Profile</h1>
+    <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo">
+    <h1 id="page_header">Instructor Profile</h1>
   </div>
   <div id="welcome-message" style="width: 100%; padding: 10px">
     Welcome, [Instructor Name]!
@@ -120,28 +47,6 @@
       <div class="section">
         <h2>Your Weekly Lesson Schedule</h2>
         <div id="calendar"></div>
-          {{!-- <table class="calendar">
-            <thead>
-              <tr>
-                <th>Sunday</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-              </tr>
-            </thead>
-            <tr>
-              <th> </th>
-              <th>4:00 PM - 5:00 PM - Trumpet - Home</th>
-              <th>2:15 PM - 3:00 PM - Piano - Hoboken High School: R228 </th>
-              <th>9:00 AM - 9:30 AM </th>
-              <th>2:15 PM - 3:00 PM - Piano - Hoboken High School: R228 </th>
-              <th>4:00 PM - 5:00 PM - Trumpet - Home</th>
-              <th></th>
-            </tr>
-          </table> --}}
       </div>
     </div>
   </div>
