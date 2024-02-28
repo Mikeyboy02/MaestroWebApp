@@ -46,6 +46,31 @@ router
         }catch(e){
             console.log(e)
         }
+    });
+
+router
+    .route('/profile')
+    .get(async (req, res) => {
+        let currentUser = req.session.user;
+        res.render("./instructorProfile", {title: "Calendar", lessons: currentUser["appointments"]});
+    })
+    .post(async (req,res) => {
+        const currentUser = req.session.user;
+        let id = currentUser["_id"];
+        let lessonType = {
+            lessonDur: req.body.lessonDur,
+            instrumentType: req.body.instrumentType,
+            lessonLoc: req.body.lessonLoc
+        };
+        
+        try{
+            await instructorData.updateAppointmentsAndAllowTimes(id, lessonType, currentUser["appointments"]);
+            //let tempUser = instructorData.getInstructorById(id);
+            req.session.user.allowedTimes.push(lessonType);
+            res.status(200).redirect("/instructors/profile");
+        }catch(e){
+            console.log(e)
+        }
     })
 
 export default router

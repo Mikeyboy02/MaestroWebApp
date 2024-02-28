@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instructor Profile</title>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-  <script src='../public/js/populate_calendar.js'></script>
+  <script src='../public/js/profile_calendar.js'></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -119,7 +119,8 @@
     <div style="width: 59%">
       <div class="section">
         <h2>Your Weekly Lesson Schedule</h2>
-          <table class="calendar">
+        <div id="calendar"></div>
+          {{!-- <table class="calendar">
             <thead>
               <tr>
                 <th>Sunday</th>
@@ -140,7 +141,7 @@
               <th>4:00 PM - 5:00 PM - Trumpet - Home</th>
               <th></th>
             </tr>
-          </table>
+          </table> --}}
       </div>
     </div>
   </div>
