@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     let calendarEl = document.getElementById('calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
+        initialView: 'dayGridWeek',
         displayEventEnd: false,
         //dragging on page
         selectable: true,
@@ -52,8 +52,15 @@ document.addEventListener('DOMContentLoaded', function() {
       initialView: 'dayGridMonth',
       displayEventEnd: false,
       forceEventDuration: true,
+      contentHeight: "auto",
+      headerToolbar: {
+        left: '',
+        center: 'title',
+        right: ''
+      }
       }); 
     calendar2.render();
+    
     let items = document.getElementsByClassName("testTime");
     for(let i = 0; i<items.length;i++){
         let item = items[i].textContent;
