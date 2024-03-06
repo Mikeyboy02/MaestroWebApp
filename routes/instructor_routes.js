@@ -12,10 +12,10 @@ router
     .post(async (req, res) => {
         const currentUser = req.session.user;
         let id = currentUser["_id"];
-        let appointments = req.body.apptInput;
+        // let appointments = req.body.apptInput;
         let allowedTimes = req.body.allowedTimesInput;
         try{
-            await instructorData.updateAppointmentsAndAllowTimes(id, allowedTimes, appointments);
+            await instructorData.updateAppointmentsAndAllowTimes(id, allowedTimes, currentUser["appointments"]);
             req.session.user = await instructorData.getInstructorById(id);
             return res.status(200).render("./instructorCalendar", {title: "Schedule", appointments: req.session.user["appointments"]});
         }catch(e){

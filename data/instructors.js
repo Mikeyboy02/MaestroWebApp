@@ -1,6 +1,7 @@
 import {ObjectId} from 'mongodb';
 import { users } from '../config/mongoCollections.js';
 import bcrypt from 'bcryptjs';
+import appointmentData from './appointments.js';
 
 const exportedMethods = {
 
@@ -63,6 +64,39 @@ const exportedMethods = {
     }
     return await this.getInstructorById(Id);
   },
+
+  async addAppointment(Id, studentName, email, type, instructorName, date, time){
+    const user = await this.getInstructorById(Id);
+    let newAppts = user.appointments;
+    newAppts = user.appointments.concat(appointmentData.createAppointment(studentName, email, type, instructorName, date, time))
+    let updatedInstructor = {
+      appointments: newAppts
+    };
+    const instructorCollection = await users();
+    const updateInfo = await instructorCollection.findOneAndUpdate(
+      {_id: new ObjectId(Id)},
+      {$set: updatedInstructor},
+      {returnDocument: 'after'} 
+    );
+    return await this.getInstructorById(Id);
+  },
+
+  async addApptType(Id, name, date, time, instrument, duration){
+    const user = await this.getInstructorById(Id);
+    let newAppts = user.allowedTimes;
+    newAppts = user.allowedTimes.concat(appointmentData.createApptType(Id, name, date, time, instrument, duration));
+    let updatedInstructor = {
+      appointments: newAppts
+    };
+    const instructorCollection = await users();
+    const updateInfo = await instructorCollection.findOneAndUpdate(
+      {_id: new ObjectId(Id)},
+      {$set: updatedInstructor},
+      {returnDocument: 'after'}
+    );
+    return await this.getInstructorById(Id);
+  },
+
   async updateAppointmentsAndAllowTimes(Id, allowedTimes, appointments) {
     const user = await this.getInstructorById(Id);
     console.log(user);
