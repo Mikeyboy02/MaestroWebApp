@@ -8,6 +8,7 @@ const exportedMethods = {
   async getInstructorById(instructorId) {
 
     const instructorCollection = await users();
+    if(!ObjectId.isValid(instructorId)) throw `Error: ID not valid`
     const searched = await instructorCollection.findOne({_id: new ObjectId(instructorId)});
     if(!searched) throw `No instructor with id ${instructorId} found.`;
     searched._id = searched._id.toString();

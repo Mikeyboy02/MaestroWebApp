@@ -26,6 +26,7 @@ const exportedMethods = {
     async getUserById(userId) {
   
       const userCollection = await users();
+      if(!ObjectId.isValid(userId)) throw `Does not exist`
       const searched = await userCollection.findOne({_id: new ObjectId(userId)});
       if(!searched) throw `No user with id ${userId} found.`;
       searched._id = searched._id.toString();
@@ -91,7 +92,28 @@ const exportedMethods = {
     },
 
     async createInstructor( first, last, email, mobile, password, role) {
+//insert helpers for all parameters
 
+    //encrypt password
+    password = await bcrypt.hash(password, 12);
+    const newInstructor = {
+      firstName: first,
+      lastName: last,
+      email: email,
+      phoneNumber: mobile,
+      password: password,
+      role: role, 
+      allowedTimes : [],
+      appointments : []
+    }
+    const instructorCollection = await users();
+    const insertInfo = await instructorCollection.insertOne(newInstructor);
+    if(!insertInfo.acknowledged || !insertInfo.insertedId) {
+      throw 'Could not create new user. Try again.';
+    }
+    const newId = insertInfo.insertedId.toString();
+    const user = await this.getUserById(newId);
+    return user;
     },
   
     async createUser(firstName, lastName, email, mobile, password, role) {

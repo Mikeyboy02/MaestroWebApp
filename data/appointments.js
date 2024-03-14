@@ -1,6 +1,5 @@
 import {ObjectId} from 'mongodb';
 import bcrypt from 'bcryptjs';
-import userData from 'users.js';
 
 const exportedMethods = {
 

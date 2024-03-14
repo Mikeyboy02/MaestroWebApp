@@ -13,7 +13,12 @@ router
     .route('/booking')
     .get(async (req, res) => {
         let currentUser = req.session.user;
-        res.render("../views/studentScheduler", {title: "Scheduler", allowedTimes: currentUser["allowedTimes"], instructor:currentUser["firstName"].concat(" ", currentUser["lastName"])})
+        let allowed = currentUser["allowedTimes"]
+        let times = [];
+        for(let i = 0; i<allowed.length; i++){
+            times.push(allowed[i].time);
+        }
+        res.render("../views/studentScheduler", {title: "Scheduler", allowedTimes: times, instructor:currentUser["firstName"].concat(" ", currentUser["lastName"])})
     })
     .post(async (req, res) => {
         let currentUser = req.session.user;
