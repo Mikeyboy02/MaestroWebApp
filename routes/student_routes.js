@@ -2,6 +2,7 @@ import {Router} from 'express'
 import instructorData from "../data/instructors.js";
 const router = Router()
 import studentData from "../data/students.js"
+import userData from "../data/users.js"
 
 router
     .route('/calendar')
@@ -31,9 +32,14 @@ router
     }) 
 
 router
-    .route('/dashboard')
+    .route('/dashboard/:id')
     .get(async (req, res) => {
         let currentUser = req.session.user;
+        let id = req.params.id
+        id = id.trim()
+        console.log(id)
+        let currentStudent = await userData.getUserById(id)
+        console.log(currentStudent)
         //console.log(currentUser)
         res.render("../views/studentDashboard", {title: "Dashboard",
     firstName: req.session.user.firstName,

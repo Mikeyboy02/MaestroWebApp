@@ -4,9 +4,12 @@ import configRoutes from './routes/index.js';
 import session from 'express-session';
 import axios from 'axios';
 import exphbs from 'express-handlebars';
+import http from 'http'
+import { Server } from 'socket.io'
 
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -90,7 +93,7 @@ app.use('/instructors/calendar', (req, res, next) => {
   }
   next()
 })
-
+/*
 app.use('/students/dashboard', (req, res, next) => {
   if (!req.session.user)
     return res.redirect('/login')
@@ -101,16 +104,45 @@ app.use('/students/dashboard', (req, res, next) => {
   }
   next()
 })
-
+*/
 
 //end middleware*********************************************************************
 
 configRoutes(app);
 
-app.listen(3000, () => {
+//import userData from "./data/users.js";
+//await userData.createUser("Josh", "Prasad", "jprasad2@stevens.edu","6034935270" ,"password123", "student");
+
+//Create HTTP Server******************
+const server = http.createServer(app)
+//Create Socket.IO server and attach it to HTTP server
+//  *CORS: Cross-Origin Resource Sharing
+const io = new Server(server).listen(8000, () => {
+  console.log("Listening on http://localhost:8000")
+})
+
+//server.listen(3000, () => {
+//  console.log("Listening on http://localhost:3000")
+//})
+io.sockets.on("listening", () => {
+  console.log("Listening on http://localhost:8000")
+})
+io.on('connection', (socket) => {
+  console.log("connection made")
+})
+
+//socket middleware***********************************************
+io.use((socket, next) => {
+  const chatname = socket.handshake.auth.chatname
+  if (!chatname) {
+    return next(new Error("invalid username"))
+  }
+  socket.chatname = chatname
+  next()
+})
+//end socket middleware*******************************************
+
+server.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000/login');
 });
-
-//import userData from "./data/users.js";
-//await userData.createUser("Josh", "Prasad", "jprasad2@stevens.edu","6034935270" ,"password123", "student");

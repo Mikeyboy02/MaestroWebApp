@@ -32,7 +32,7 @@ router
           role,
           parent
         )
-        //console.log(newUser)
+        console.log(newUser)
         return res.status(200).redirect("/login")
       } catch (e) {
         console.log(e)

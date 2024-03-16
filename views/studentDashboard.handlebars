@@ -74,6 +74,15 @@
             padding: 10px;
             border-radius: 5px;
         }
+
+        .sidebar {
+            background-color: #f4cf08;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            min-width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -150,7 +159,15 @@
         </div>
         </div>      
         <!-- Other dashboard sections go here -->
-
+        <div id="chat-sidebar" class="sidebar">
+            <script src="public/socket.io/socket.io.js"></script>
+            <script>
+                const socket = io('http://localhost:3000');
+                console.log(socket)
+                socket.auth = { firstName }
+                socket.connect()
+            </script>
+        </div>
     </div>
 
 </body>
