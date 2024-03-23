@@ -120,14 +120,14 @@ configRoutes(app);
 
 //import userData from "./data/users.js";
 //await userData.createUser("Josh", "Prasad", "jprasad2@stevens.edu","6034935270" ,"password123", "student");
-const httpServer = http.Server(app)
+const httpServer = http.createServer(app)
 
 httpServer.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000/login', httpServer.address().port);
 });
 
-const io = new Server(httpServer, {
+const io = new Server({httpServer}, {
   transports: ['websocket',  'polling'],
   cors: {
     origin: "*",
@@ -187,7 +187,7 @@ io.listen(8000, () => {
 
 //socket middleware***********************************************
 
-io.engine.on("connection_error", (err) => {
+io.on("connection_error", (err) => {
   console.log(err.req);      // the request object
   console.log(err.code);     // the error code, for example 1
   console.log(err.message);  // the error message, for example "Session ID unknown"
