@@ -107,6 +107,22 @@ app.use('/students/dashboard', (req, res, next) => {
 
 configRoutes(app);
 
+import { WebSocketServer } from 'ws'
+import { connect } from 'http2';
+import http from 'http'
+
+const server = http.createServer(app)
+const wss = new WebSocketServer({server})
+
+wss.on('connection', function connection(ws) {
+  console.log("WS connection made")
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  })
+
+  ws.send('This is a message')
+})
+
 app.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000/login');

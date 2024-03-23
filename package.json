@@ -10,7 +10,8 @@
     "fullcalendar": "^6.1.10",
     "googleapis": "^133.0.0",
     "mongodb": "^6.3.0",
-    "nodemailer": "^6.9.9"
+    "nodemailer": "^6.9.9",
+    "ws": "^8.16.0"
   },
   "name": "maestrowebapp",
   "version": "1.0.0",
