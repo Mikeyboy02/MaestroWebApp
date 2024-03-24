@@ -123,7 +123,10 @@ wss.on('connection', function connection(ws, req) {
   socketUserIDs[userID] = ws
   console.log("Connection UserID: " + userID)
   
-  ws.on('message', function (message) {  //data.from, data.message
+  ws.on('message', function (message) {
+    //Message
+    //Receive     [userName, toUserName, toUserID, messagetext]
+    //Send        [userName, messagetext]
     console.log('received from ' + userID + ': ' + message)
     ws.send(`${message}`)
     wss.clients.forEach((client) => {
