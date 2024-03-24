@@ -42,3 +42,26 @@ h1 {
     text-align: center;
     line-height: 100px;
 }
+
+.sidebar {
+    display: none;
+    background-color: #c9c9c9;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 300px;
+}
+
+.sidebar-button {
+    position:sticky;
+    bottom: 5%;
+    right: 0%;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    float: right;
+}

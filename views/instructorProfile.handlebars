@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Instructor Profile</title>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-  <script src='../public/js/profile_calendar.js'></script>
+  <script src='../../public/js/profile_calendar.js'></script>
+  <link rel="stylesheet" href="../../public/css/instructorProfile.css">
 </head>
 <body>
-  <div id="header">
-    {{!-- <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo"> --}}
-    <h1 id="page_header">Instructor Profile</h1>
-  </div>
   <div id="welcome-message" style="width: 100%; padding: 10px">
     Welcome, [Instructor Name]!
   </div>
@@ -19,9 +16,9 @@
     <div style="width: 39%">
       <div class="section">
         <h2>General Information</h2>
-        {{!-- <div class="profile-info">
-          <img class="profile-picture" src="./layouts/2021maestroMUSIC.png" alt="Profile Picture">
-        </div> --}}
+        <div class="profile-info">
+          <img class="profile-picture" src="" alt="Profile Picture">
+        </div>  
         <div class="info-details">
           <p><strong>Name:</strong> <input type="dropdown" id="name"></p>
           <p><strong>Pronouns:</strong> <input type="text" id="pronouns"></p>
@@ -50,6 +47,30 @@
     </div>
   </div>
 
+<button id="sidebar-button" class="sidebar-button" onclick="activateSidebar()">Chat</button>
+        <div id="chat-sidebar" class="sidebar">
+
+            {{> chatroom}}
+        </div>
+        <script>
+            function activateSidebar() {
+                //document.getElementById("chat-sidebar").style.display = "block"
+                //document.getElementById("sidebar-button").style.right = "300px"
+                let display = document.querySelector('.sidebar')
+                let style = getComputedStyle(display)
+                //console.log(style.display)
+                if (style.display == "none") {
+                    //console.log("here")
+                    document.getElementById("chat-sidebar").style.display = "block"
+                    document.getElementById("sidebar-button").style.right = "300px"
+                }
+                else {
+                    document.getElementById("chat-sidebar").style.display = "none"
+                    document.getElementById("sidebar-button").style.right = "0%"
+                }
+            }
+            </script>
+    </div>
 
 </body>
 </html>

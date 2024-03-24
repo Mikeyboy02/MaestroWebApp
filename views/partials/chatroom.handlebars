@@ -1,0 +1,44 @@
+<p>
+    <label for="messageInput">Message: 
+    <input type="text" name="messageInput" id="messageInput">
+    <button id="chatButton" type="button">Send</button>
+    </input>
+    </label>
+
+    <ul id="messages" name="messages">
+        Messages:
+    </ul>
+
+    <script>
+        console.log("socket attempt")
+        const ws = new WebSocket(`ws://localhost:3000/${{id}}`)
+        console.log("socket attempt2")
+
+            var chatButton = document.getElementById("chatButton")
+            console.log(chatButton)
+            document.getElementById("chatButton").addEventListener("click", messageSendHandler)
+
+            ws.onopen = () => {
+                console.log('Connected to the server')
+            }
+
+            function messageSendHandler(e) {
+                console.log("messageSendHandler")
+                //e.preventDefault()
+                console.log("messageSendHandler")
+                let message = document.getElementById("messageInput").value
+                console.log(message)
+                ws.send(message)
+                messageInput.value = ''
+            }
+            
+            ws.onmessage = (event) => {
+                const item = document.createElement('li')
+                item.textContent = event.data
+                document.getElementById("messages").appendChild(item)
+            }
+            ws.onerror = (err) => {
+                console.log(`connect_error due to ${err}`);
+            }
+    </script>
+</p>

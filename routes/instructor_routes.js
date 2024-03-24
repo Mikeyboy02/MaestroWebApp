@@ -5,7 +5,7 @@ import userData from "../data/users.js";
 import apptData from "../data/appointments.js";
 
 router
-    .route('/calendar')
+    .route('/calendar/:id')
     .get(async (req, res) => {
         let currentUser = req.session.user;
         res.render("./instructorCalendar", {title: "Calendar", appointments: currentUser["appointments"],  id: currentUser["_id"]});
@@ -54,17 +54,10 @@ router
 router
     .route('/profile/:id')
     .get(async (req, res) => {
+        let id = req.params.id
+        id = id.trim()
         let currentUser = req.session.user;
-        let id = req.params.id;
-        id = id.trim();
-        console.log(id)
-        let currentInstructor = await userData.getUserById(id);
-        console.log(currentInstructor);
-        let name = currentInstructor.firstName;
-        name = name.concat(" ", currentInstructor.lastName);
-        let email = currentInstructor.email;
-        let number = currentInstructor.phoneNumber;
-        res.render("./instructorProfile", {title: "Calendar", name: name, email:email, number:number});
+        res.render("./instructorProfile", {title: "Calendar", lessons: currentUser["appointments"], id: id});
     })
     // .post(async (req,res) => {
     //     const currentUser = req.session.user;
