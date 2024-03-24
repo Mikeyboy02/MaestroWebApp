@@ -6,7 +6,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <link rel="stylesheet" href="../public/css/design.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,14 +73,32 @@
             padding: 10px;
             border-radius: 5px;
         }
+
+        .sidebar {
+            display: none;
+            background-color: #c9c9c9;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            min-width: 300px;
+        }
+
+        .sidebar-button {
+            position:sticky;
+            bottom: 5%;
+            right: 0%;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            float: right;
+        }
     </style>
 </head>
 <body>
-
-    <header id="header">
-        <img src="../2021maestroMUSIC.png" alt="logo" id="logo">
-        <h1>Student Profile Dashboard</h1>
-    </header>
 
     <div class="dashboard-container">
         <div class="welcome-message">
@@ -91,7 +108,7 @@
         <div class="dashboard-section">
             <h2>General Information</h2>
             <div class="profile-info">
-                <img class="profile-picture" src="[ProfilePictureURL]" alt="Profile Picture">
+                <img class="profile-picture" src="" alt="Profile Picture">
                 <div class="info-details">
                     <p><strong>Name:</strong> {{firstName}} {{lastName}}</p>
                     <p><strong>Pronouns:</strong> [Pronouns]</p>
@@ -150,7 +167,29 @@
         </div>
         </div>      
         <!-- Other dashboard sections go here -->
+        <button id="sidebar-button" class="sidebar-button" onclick="activateSidebar()">Chat</button>
+        <div id="chat-sidebar" class="sidebar">
 
+            {{> chatroom}}
+        </div>
+        <script>
+            function activateSidebar() {
+                //document.getElementById("chat-sidebar").style.display = "block"
+                //document.getElementById("sidebar-button").style.right = "300px"
+                let display = document.querySelector('.sidebar')
+                let style = getComputedStyle(display)
+                //console.log(style.display)
+                if (style.display == "none") {
+                    //console.log("here")
+                    document.getElementById("chat-sidebar").style.display = "block"
+                    document.getElementById("sidebar-button").style.right = "300px"
+                }
+                else {
+                    document.getElementById("chat-sidebar").style.display = "none"
+                    document.getElementById("sidebar-button").style.right = "0%"
+                }
+            }
+            </script>
     </div>
 
 </body>

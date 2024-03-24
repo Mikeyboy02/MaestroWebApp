@@ -6,7 +6,7 @@ import axios from 'axios';
 import exphbs from 'express-handlebars';
 
 import {fileURLToPath} from 'url';
-import {dirname} from 'path';
+import {dirname, parse} from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -114,16 +114,29 @@ import http from 'http'
 const server = http.createServer(app)
 const wss = new WebSocketServer({server})
 
-wss.on('connection', function connection(ws) {
-  console.log("WS connection made")
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
+var socketUserIDs = {}
+
+wss.on('connection', function connection(ws, req) {
+  //console.log(req.url)
+  var userID = req.url.split('$')[1]
+  console.log(userID)
+  socketUserIDs[userID] = ws
+  console.log("Connection UserID: " + userID)
+  
+  ws.on('message', function (message) {  //data.from, data.message
+    console.log('received from ' + userID + ': ' + message)
+    ws.send(`${message}`)
+    wss.clients.forEach((client) => {
+      if (client !== ws) {
+        client.send(message, {binary: false})
+      }
+    })
   })
 
-  ws.send('This is a message')
+  //ws.send('This is a message')
 })
 
-app.listen(3000, () => {
+server.listen(3000, () => {
   console.log("We've now got a server!");
   console.log('Your routes will be running on http://localhost:3000/login');
 });

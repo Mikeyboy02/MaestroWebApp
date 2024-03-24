@@ -4,7 +4,7 @@ import instructorData from "../data/instructors.js";
 import userData from "../data/users.js"
 
 router
-    .route('/calendar')
+    .route('/calendar/:id')
     .get(async (req, res) => {
         let currentUser = req.session.user;
         res.render("./instructorCalendar", {title: "Calendar", appointments: currentUser["appointments"]});
@@ -49,10 +49,12 @@ router
     });
 
 router
-    .route('/profile')
+    .route('/profile/:id')
     .get(async (req, res) => {
+        let id = req.params.id
+        id = id.trim()
         let currentUser = req.session.user;
-        res.render("./instructorProfile", {title: "Calendar", lessons: currentUser["appointments"]});
+        res.render("./instructorProfile", {title: "Calendar", lessons: currentUser["appointments"], id: id});
     })
     .post(async (req,res) => {
         const currentUser = req.session.user;

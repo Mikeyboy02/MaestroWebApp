@@ -31,13 +31,16 @@ router
     }) 
 
 router
-    .route('/dashboard')
+    .route('/dashboard/:id')
     .get(async (req, res) => {
+        let id = req.params.id
+        id = id.trim()
         let currentUser = req.session.user;
         //console.log(currentUser)
         res.render("../views/studentDashboard", {title: "Dashboard",
     firstName: req.session.user.firstName,
-    lastName: req.session.user.lastName})
+    lastName: req.session.user.lastName,
+    id: id})
     })
 
 router
