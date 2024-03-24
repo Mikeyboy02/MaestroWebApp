@@ -6,11 +6,10 @@
   <title>Instructor Profile</title>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
   <script src='../public/js/profile_calendar.js'></script>
-  <link rel="stylesheet" href="../public/css/instructorProfile.css">
 </head>
 <body>
   <div id="header">
-    <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo">
+    {{!-- <img src="./layouts/2021maestroMUSIC.png" alt="logo" id="logo"> --}}
     <h1 id="page_header">Instructor Profile</h1>
   </div>
   <div id="welcome-message" style="width: 100%; padding: 10px">
@@ -20,9 +19,9 @@
     <div style="width: 39%">
       <div class="section">
         <h2>General Information</h2>
-        <div class="profile-info">
-          <img class="profile-picture" src="[ProfilePictureURL]" alt="Profile Picture">
-        </div>
+        {{!-- <div class="profile-info">
+          <img class="profile-picture" src="./layouts/2021maestroMUSIC.png" alt="Profile Picture">
+        </div> --}}
         <div class="info-details">
           <p><strong>Name:</strong> <input type="dropdown" id="name"></p>
           <p><strong>Pronouns:</strong> <input type="text" id="pronouns"></p>
@@ -36,9 +35,9 @@
       <div class="section">
         <h2>Teaching Information</h2>
         <div class="info-details">
-          <p><strong>Organizations:</strong> <input type="dropdown" id="name"></p>
-          <p><strong>Instruments:</strong> <input type="text" id="pronouns"></p>
-          <p><strong>Locations:</strong> <input type="text" id="age"></p>
+          <p><strong>Organizations:</strong> <input type="dropdown" id="OrgName"></p>
+          <p><strong>Instruments:</strong> <input type="text" id="Instruments"></p>
+          <p><strong>Locations:</strong> <input type="text" id="Locations"></p>
           <!-- Add more general information fields as needed -->
         </div>
       </div>

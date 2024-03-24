@@ -1,7 +1,8 @@
 import {Router} from 'express'
 const router = Router()
 import instructorData from "../data/instructors.js";
-import userData from "../data/users.js"
+import userData from "../data/users.js";
+import apptData from "../data/appointments.js";
 
 router
     .route('/calendar')
@@ -32,16 +33,18 @@ router
     .post(async (req,res) => {
         const currentUser = req.session.user;
         let id = currentUser["_id"];
-        let lessonType = {
-            lessonDur: req.body.lessonDur,
-            instrumentType: req.body.instrumentType,
-            lessonLoc: req.body.lessonLoc
-        };
-        
+        let name = currentUser["firstName"].concat(" ", currentUser["lastName"]);
+        let date = req.body.lessonDate;
+        let time = req.body.lessonTime;
+        let duration = req.body.lessonDur;
+        let instrument = req.body.instrumentType;
+        //const newAppt = await apptData.createApptType(id,name,date,time, instructorData, duration);
+        //console.log(name);
         try{
-            await instructorData.updateAppointmentsAndAllowTimes(id, lessonType, currentUser["appointments"]);
+            await instructorData.addApptType(id,name,date,time, instrument, duration);
             //let tempUser = instructorData.getInstructorById(id);
-            req.session.user.allowedTimes.push(lessonType);
+            req.session.user = await userData.getUserById(id);
+            //req.session.user.allowedTimes.push(lessonType);
             res.status(200).redirect("/instructors/schedule");
         }catch(e){
             console.log(e)

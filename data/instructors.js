@@ -2,6 +2,7 @@ import {ObjectId} from 'mongodb';
 import { users } from '../config/mongoCollections.js';
 import bcrypt from 'bcryptjs';
 import appointmentData from './appointments.js';
+import userData from "./users.js";
 
 const exportedMethods = {
 
@@ -67,7 +68,7 @@ const exportedMethods = {
   },
 
   async addAppointment(Id, studentName, email, type, instructorName, date, time){
-    const user = await this.getInstructorById(Id);
+    const user = await userData.getUserById(Id);
     let newAppts = user.appointments;
     newAppts = user.appointments.concat(appointmentData.createAppointment(studentName, email, type, instructorName, date, time))
     let updatedInstructor = {
@@ -79,15 +80,15 @@ const exportedMethods = {
       {$set: updatedInstructor},
       {returnDocument: 'after'} 
     );
-    return await this.getInstructorById(Id);
+    return await userData.getUserById(Id);
   },
 
   async addApptType(Id, name, date, time, instrument, duration){
     const user = await this.getInstructorById(Id);
     let newAppts = user.allowedTimes;
-    newAppts = user.allowedTimes.concat(appointmentData.createApptType(Id, name, date, time, instrument, duration));
+    newAppts = user.allowedTimes.concat(await appointmentData.createApptType(Id, name, date, time, instrument, duration));
     let updatedInstructor = {
-      appointments: newAppts
+      allowedTimes: newAppts
     };
     const instructorCollection = await users();
     const updateInfo = await instructorCollection.findOneAndUpdate(

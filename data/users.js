@@ -26,7 +26,7 @@ const exportedMethods = {
     async getUserById(userId) {
   
       const userCollection = await users();
-      if(!ObjectId.isValid(userId)) throw `Does not exist`
+      // if(!ObjectId.isValid(userId)) throw `Does not exist`
       const searched = await userCollection.findOne({_id: new ObjectId(userId)});
       if(!searched) throw `No user with id ${userId} found.`;
       searched._id = searched._id.toString();
