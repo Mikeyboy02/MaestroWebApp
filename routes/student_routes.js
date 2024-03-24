@@ -2,6 +2,7 @@ import {Router} from 'express'
 import instructorData from "../data/instructors.js";
 const router = Router()
 import studentData from "../data/students.js"
+import userData from "../data/users.js";
 
 router
     .route('/calendar')
@@ -10,10 +11,20 @@ router
     })
 
 router 
-    .route('/booking')
+    //routes student to book with instructor id in url
+    .route('/booking/:id')
     .get(async (req, res) => {
-        let currentUser = req.session.user;
-        res.render("../views/studentScheduler", {title: "Scheduler", allowedTimes: currentUser["allowedTimes"], instructor:currentUser["firstName"].concat(" ", currentUser["lastName"])})
+        let id = "65f386be46e7afa8bb87c851";
+        // let currentInstructor = await userData.getUserById(id);
+        let currentInstructor = req.session.user
+        let allowed = currentInstructor["allowedTimes"]
+        console.log(allowed);
+        let times = [];
+        for(let i = 0; i<allowed.length; i++){
+            times.push(allowed[i].time.concat(" ", allowed[i].date));
+            console.log(times[i])
+        }
+        res.render("../views/studentScheduler", {title: "Scheduler", allowedTimes: times, instructor:currentInstructor["firstName"].concat(" ", currentInstructor["lastName"])})
     })
     .post(async (req, res) => {
         let currentUser = req.session.user;
