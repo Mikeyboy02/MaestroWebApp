@@ -9,16 +9,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script> --}}
     <meta charset='utf-8' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-    <script src='../public/js/populate_calendar.js'></script>
+    <script src='../../public/js/populate_calendar.js'></script>
     {{!-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js "></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.10/index.global.min.js"></script> --}}
 </head>
 <body>
-    <a href="/students/booking">Click here to see student booking view</a>
+    <a href="/students/booking/{{id}}">Click here to see student booking view</a>
+    <a href="/instructors/profile/{{id}}">Click here to see instructor profile view</a>
     <h1>Instructor Schedule</h1>
-    <div id="instructor-schedule" style="margin: 0px 10px 50px; margin">
-        <div id="calendar"></div>
+    <div id="full-page" style="display:flex; width: 100vw; height: 100vh">
+        <div id="month-schedule" style="margin: 0px 10px 50px; width:33%">
+            <div id="calendar-month"></div>
+        </div><div id="instructor-schedule" style="margin: 0px 10px 50px; width:66%">
+            <div id="calendar"></div>
+    </div>
     </div>
     <a href="/instructors/schedule" >Click here to Schedule an Appointment</a>
     <form action="/instructors/calendar" method="post" id="delete-form" hidden="true">

@@ -57,13 +57,13 @@ router
         console.log(userInfo)
         console.log("done");
         if (userInfo.accessor == "instructor")
-          return res.status(200).redirect("/instructors/calendar");
+          return res.status(200).redirect(`/instructors/calendar/${userInfo.user._id}`);
         else if (userInfo.accessor == "student")
-          return res.status(200).redirect("/students/dashboard")
+          return res.status(200).redirect(`/students/dashboard/${userInfo.user._id}`)
         else if (userInfo.accessor == "parent" && req.session.user.parent.loggedIn == false)
           return res.status(200).redirect("/students/parent/updatePassword")
         else if (userInfo.accessor == "parent")
-          return res.status(200).redirect("/students/dashboard")
+          return res.status(200).redirect(`/students/dashboard/${userInfo.user._id}`)
       }catch(e){
         console.log(e);
       }

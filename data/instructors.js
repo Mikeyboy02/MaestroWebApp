@@ -1,12 +1,15 @@
 import {ObjectId} from 'mongodb';
 import { users } from '../config/mongoCollections.js';
 import bcrypt from 'bcryptjs';
+import appointmentData from './appointments.js';
+import userData from "./users.js";
 
 const exportedMethods = {
 
   async getInstructorById(instructorId) {
 
     const instructorCollection = await users();
+    if(!ObjectId.isValid(instructorId)) throw `Error: ID not valid`
     const searched = await instructorCollection.findOne({_id: new ObjectId(instructorId)});
     if(!searched) throw `No instructor with id ${instructorId} found.`;
     searched._id = searched._id.toString();
@@ -63,6 +66,39 @@ const exportedMethods = {
     }
     return await this.getInstructorById(Id);
   },
+
+  async addAppointment(Id, studentName, email, type, instructorName, date, time){
+    const user = await userData.getUserById(Id);
+    let newAppts = user.appointments;
+    newAppts = user.appointments.concat(appointmentData.createAppointment(studentName, email, type, instructorName, date, time))
+    let updatedInstructor = {
+      appointments: newAppts
+    };
+    const instructorCollection = await users();
+    const updateInfo = await instructorCollection.findOneAndUpdate(
+      {_id: new ObjectId(Id)},
+      {$set: updatedInstructor},
+      {returnDocument: 'after'} 
+    );
+    return await userData.getUserById(Id);
+  },
+
+  async addApptType(Id, name, date, time, instrument, duration){
+    const user = await this.getInstructorById(Id);
+    let newAppts = user.allowedTimes;
+    newAppts = user.allowedTimes.concat(await appointmentData.createApptType(Id, name, date, time, instrument, duration));
+    let updatedInstructor = {
+      allowedTimes: newAppts
+    };
+    const instructorCollection = await users();
+    const updateInfo = await instructorCollection.findOneAndUpdate(
+      {_id: new ObjectId(Id)},
+      {$set: updatedInstructor},
+      {returnDocument: 'after'}
+    );
+    return await this.getInstructorById(Id);
+  },
+
   async updateAppointmentsAndAllowTimes(Id, allowedTimes, appointments) {
     const user = await this.getInstructorById(Id);
     console.log(user);

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructor Profile</title>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+  <script src='../../public/js/profile_calendar.js'></script>
+  <link rel="stylesheet" href="../../public/css/instructorProfile.css">
+</head>
+<body>
+  <div id="welcome-message" style="width: 100%; padding: 10px">
+    Welcome, [Instructor Name]!
+  </div>
+  <div id="main-content">
+    <div style="width: 39%">
+      <div class="section">
+        <h2>General Information</h2>
+        <div class="profile-info">
+          <img class="profile-picture" src="" alt="Profile Picture">
+        </div>  
+        <div class="info-details">
+          <p><strong>Name:</strong> <input type="dropdown" id="name"></p>
+          <p><strong>Pronouns:</strong> <input type="text" id="pronouns"></p>
+          <p><strong>Age:</strong> <input type="text" id="age"></p>
+          <p><strong>Email:</strong> <input type="email" id="parentEmail"></p>
+          <p><strong>Phone:</strong> <input type="tel" id="parentPhone"></p>
+          <p><strong>Address:</strong> <input type="text" id="parentAddress"></p>
+          <!-- Add more general information fields as needed -->
+        </div>
+      </div>
+      <div class="section">
+        <h2>Teaching Information</h2>
+        <div class="info-details">
+          <p><strong>Organizations:</strong> <input type="dropdown" id="OrgName"></p>
+          <p><strong>Instruments:</strong> <input type="text" id="Instruments"></p>
+          <p><strong>Locations:</strong> <input type="text" id="Locations"></p>
+          <!-- Add more general information fields as needed -->
+        </div>
+      </div>
+    </div>
+    <div style="width: 59%">
+      <div class="section">
+        <h2>Your Weekly Lesson Schedule</h2>
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+
+<button id="sidebar-button" class="sidebar-button" onclick="activateSidebar()">Chat</button>
+        <div id="chat-sidebar" class="sidebar">
+
+            {{> chatroom}}
+        </div>
+        <script>
+            function activateSidebar() {
+                //document.getElementById("chat-sidebar").style.display = "block"
+                //document.getElementById("sidebar-button").style.right = "300px"
+                let display = document.querySelector('.sidebar')
+                let style = getComputedStyle(display)
+                //console.log(style.display)
+                if (style.display == "none") {
+                    //console.log("here")
+                    document.getElementById("chat-sidebar").style.display = "block"
+                    document.getElementById("sidebar-button").style.right = "300px"
+                }
+                else {
+                    document.getElementById("chat-sidebar").style.display = "none"
+                    document.getElementById("sidebar-button").style.right = "0%"
+                }
+            }
+            </script>
+    </div>
+
+</body>
+</html>

@@ -13,6 +13,17 @@ const exportedMethods = {
     time:Time
   };
   return newAppt;
+ },
+ async createApptType(instructorId, instructorName, date, time, instrument, duration){
+  const newAppt = {
+    instructorId: instructorId,
+    instructorName: instructorName,
+    date: date,
+    time: time,
+    duration: duration,
+    instrument: instrument
+  };
+  return newAppt;
  }
 
 

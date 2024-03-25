@@ -67,7 +67,7 @@
     <label for="time">Time:</label>
     <select id="time" name="time" required>
       {{#each allowedTimes}}
-      <option value="{{this}}">{{this}}</option>
+      <option value="{{this.time}}">{{this}}</option>
       {{/each}}
     </select>
     <!-- once the allowedTime is shown then for the first run(showing to John) we can have the 
