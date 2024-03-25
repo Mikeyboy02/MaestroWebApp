@@ -34,7 +34,7 @@ router
     .get(async (req, res) => {
         //get current user
         let currentUser = req.session.user;
-        // Render 'instructorScheduler' template and passing title and lessons data
+        // Get instructor scheduler page and pass title and lessons data
         res.render("./instructorScheduler", {title: "Schedule", lessons: currentUser["allowedTimes"]});
     })
     .post(async (req,res) => {
