@@ -13,6 +13,7 @@ router
 
     })
 
+//handling /calendar route
 router
     .route('/calendar')
     .get(async (req, res) => {
