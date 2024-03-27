@@ -127,11 +127,13 @@ wss.on('connection', function connection(ws, req) {
     //Message
     //Receive     [userName, toUserName, toUserID, messagetext]
     //Send        [userName, messagetext]
-    console.log('received from ' + userID + ': ' + message)
-    ws.send(`${message}`)
+    message = JSON.parse(message)
+    console.log(message)
+    console.log('received from ' + message[0] + ': ' + message[1])
+    ws.send(`${message[0]}: ${message[1]}`)
     wss.clients.forEach((client) => {
       if (client !== ws) {
-        client.send(message, {binary: false})
+        client.send(`${message[0]}: ${message[1]}`, {binary: false})
       }
     })
   })

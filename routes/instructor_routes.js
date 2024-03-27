@@ -57,7 +57,12 @@ router
         let id = req.params.id
         id = id.trim()
         let currentUser = req.session.user;
-        res.render("./instructorProfile", {title: "Calendar", lessons: currentUser["appointments"], id: id});
+        res.render("./instructorProfile", {
+            title: "Calendar", 
+            lessons: currentUser["appointments"], 
+            id: id,
+            firstName: req.session.user.firstName,
+            lastName: req.session.user.lastName});
     })
     // .post(async (req,res) => {
     //     const currentUser = req.session.user;

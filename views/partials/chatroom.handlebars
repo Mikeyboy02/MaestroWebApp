@@ -26,9 +26,11 @@
                 console.log("messageSendHandler")
                 //e.preventDefault()
                 console.log("messageSendHandler")
-                let message = document.getElementById("messageInput").value
-                console.log(message)
-                ws.send(message)
+                let text = document.getElementById("messageInput").value
+                console.log(text)
+                let name = "{{firstName}} {{lastName}}"
+                console.log(name)
+                ws.send(JSON.stringify([name, text]))
                 messageInput.value = ''
             }
             
