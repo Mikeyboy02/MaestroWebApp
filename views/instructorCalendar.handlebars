@@ -32,12 +32,12 @@
     <br>
     <button onClick="window.location.reload();" type="submit">Submit</button>
     </form>
-    <form action="/instructors/calendar" method="post" id="allowedTimesform">
+    {{!-- <form action="/instructors/calendar" method="post" id="allowedTimesform">
     Allow Time:
     <input type="datetime-local" name="allowedTimesInput" id="allowedTimesInput">
     <br>
     <button type="submit">Submit</button>
-    </form>
+    </form> --}}
     <div id="appointmentDiv" hidden="true">
         Time
         {{#each appointments}}

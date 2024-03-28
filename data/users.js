@@ -33,7 +33,34 @@ const exportedMethods = {
       return searched;
     },
 
-    async createStudent( first, last, email, mobile, password, role, parent) {
+    async createAdultStudent(first, last, email, mobile, password, role, age) {
+      password = await bcrypt.hash(password, 12);
+      let newUser
+
+      newUser = {
+        firstName: first,
+        lastName: last,
+        email: email,
+        phoneNumber: mobile,
+        password: password,
+        role: role,
+        parent: null,
+        appointments: [],
+        age: age
+      }
+
+      const userCollection = await users();
+      const insertInfo = await userCollection.insertOne(newUser);
+      if(!insertInfo.acknowledged || !insertInfo.insertedId) {
+        throw 'Could not create new user. Try again.';
+      }
+      const newId = insertInfo.insertedId.toString();
+      const user = await this.getUserById(newId);
+
+      return user;
+    },
+
+    async createMinorStudent( first, last, email, mobile, password, role, parent, age) {
       password = await bcrypt.hash(password, 12);
       let newUser
 
@@ -45,7 +72,8 @@ const exportedMethods = {
         password: password,
         role: role,
         parent: parent,
-        appointments: []
+        appointments: [],
+        age: age
       }
 
       let otpassword = await this.generatePassword()
@@ -104,7 +132,8 @@ const exportedMethods = {
       password: password,
       role: role, 
       allowedTimes : [],
-      appointments : []
+      appointments : [],
+      appointmentTypes: []
     }
     const instructorCollection = await users();
     const insertInfo = await instructorCollection.insertOne(newInstructor);

@@ -13,12 +13,38 @@
 
         <label for="mobileNumberInput" id="mobileLabel">Mobile Phone: </label>
         <input type="tel" name="mobileNumberInput" id="mobileNumberInput" placeholder="XXX-XXX-XXXX" autocomplete="off"/><br>
-
+        
+        <div id="parentDiv" hidden="true">
         <label for="parentEmailInput" id="parentEmailLabel">Parent Email: </label>
         <input type="email" name="parentEmailInput" id="parentEmailInput" placeholder="email" autocomplete="off"/><br>
 
         <label for="parentNumberInput" id="parentNumberEmail">Parent Mobile: </label>
         <input type="tel" name="parentNumberInput" id="parentNumberInput" placeholder="XXX-XXX-XXXX" autocomplete="off"/><br>
+        </div>
+
+
+        <label for="ageInput" id="ageLabel">Age: </label>
+        <input type="number" name="ageInput" id="ageInput"/><br>
+        <script>
+               let registration = document.getElementById('signup-form');
+               let age = document.getElementById('ageInput'); 
+               let parentDiv = document.getElementById("parentDiv");
+               let format = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+               registration.addEventListener('submit', (event) => {
+                console.log("Form submission recieved");
+                console.log("Has a form");
+                console.log(typeof(age.value));
+                if(age.value < 18){
+                        let email = document.getElementById('parentEmailInput');
+                        let number = document.getElementById('parentNumberInput');
+                        if(!format.test(email.value.trim()) || number.value.length !=12){
+                                event.preventDefault();
+                                console.log("age block");
+                                parentDiv.hidden = false;
+                        }
+                }
+               })
+        </script>
 
         <label for="passwordInput" id="passwordLabel">Password: </label>
         <input type="password" name="passwordInput" id="passwordInput" placeholder="password" autocomplete="off"/>

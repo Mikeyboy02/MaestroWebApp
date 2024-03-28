@@ -34,17 +34,42 @@ router
         const currentUser = req.session.user;
         let id = currentUser["_id"];
         let name = currentUser["firstName"].concat(" ", currentUser["lastName"]);
-        let date = req.body.lessonDate;
-        let time = req.body.lessonTime;
+        let cost = req.body.lessonCost;
         let duration = req.body.lessonDur;
         let instrument = req.body.instrumentType;
+        let form = req.body.lessonForm;
+        console.log(form);
         //const newAppt = await apptData.createApptType(id,name,date,time, instructorData, duration);
         //console.log(name);
         try{
-            await instructorData.addApptType(id,name,date,time, instrument, duration);
+            await instructorData.addApptType(id,name,cost, instrument, duration);
             //let tempUser = instructorData.getInstructorById(id);
             req.session.user = await userData.getUserById(id);
             //req.session.user.allowedTimes.push(lessonType);
+            res.status(200).redirect("/instructors/schedule");
+        }catch(e){
+            console.log(e)
+        }
+    });
+
+router
+    .route('/allowTime')
+    .post(async (req, res) => {
+        let currentUser = req.session.user;
+        let id = currentUser["_id"];
+        let start = req.body.startTime;
+        let end = req.body.endTime;
+        let allowedDay = req.body.dayOfTheWeek;
+        let weeklyTime = {
+            dotw: allowedDay,
+            startTime : start,
+            endTime : end
+        }
+        let appts = [];
+        try{
+            await instructorData.updateAppointmentsAndAllowTimes(id, weeklyTime, appts);
+            req.session.user = await userData.getUserById(id);
+            console.log(req.session.user["allowedTimes"]);
             res.status(200).redirect("/instructors/schedule");
         }catch(e){
             console.log(e)

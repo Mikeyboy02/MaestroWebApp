@@ -31,11 +31,30 @@
         </div>
         <p> - </p>
         <div> 
-            <h3>Date and Time</h3>
-            <input type="date" name="lessonDate" id="lessonDate">
-            <input type="time" name="lessonTime" id="lessonTime">
+            <h3>Cost (inDollars) </h3>
+            $<input type="number" name="lessonCost" id="lessonCost"/>
         </div>
         <button type="submit">Create Lesson Type</button>
+        </form>
+
+
+        <form action="/instructors/allowTime" method="post" id="allowedTimeForm">
+        <div>
+          <h3>Allow Weekly Times:</h3>
+          <select name="dayOfTheWeek" id="dayOfTheWeek">
+            <option value="M">Monday</option>
+            <option value="Tu">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="Th">Thursday</option>
+            <option value="F">Friday</option>
+            <option value="Sa">Saturday</option>
+            <option value="Su">Sunday</option>
+          </select> <br>
+          Start Time: <input type="time" name="startTime" id="startTime"/><br>
+          End Time: <input type="time" name="endTime" id="endTime"/><br>
+
+        </div>
+        <button type="submit">Submit Time</button>
         </form>
     </div>
     <div>
@@ -43,7 +62,7 @@
       <li>
         <p>Instrument: {{this.instrumentType}}</p>
         <p>lesson Duration: {{this.lessonDur}}</p>
-        <p>Lesson LocationL: {{this.lessonLoc}}</p>
+        <p>Lesson LocationL: {{this.lessonCost}}</p>
       </li>
       {{/each}}
     </div>

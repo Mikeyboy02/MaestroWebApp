@@ -20,18 +20,32 @@ router
         let email = req.body.emailAddressInput
         let mobile = req.body.mobileNumberInput
         let password = req.body.passwordInput
+        let age = req.body.ageInput
         let role = "student"
         let parent = {email: req.body.parentEmailInput, number: req.body.parentNumberInput, password:""}
-
-        let newUser = await userData.createStudent(
-          firstName,
-          lastName,
-          email,
-          mobile,
-          password,
-          role,
-          parent
-        )
+        let newUser;
+        if(age < 18){
+          newUser = await userData.createMinorStudent(
+            firstName,
+            lastName,
+            email,
+            mobile,
+            password,
+            role,
+            parent,
+            age
+            );
+        }else{
+          newUser = await userData.createAdultStudent(
+            firstName,
+            lastName,
+            email,
+            mobile,
+            password,
+            role,
+            age
+          );
+        }
         //console.log(newUser)
         return res.status(200).redirect("/login")
       } catch (e) {

@@ -67,10 +67,10 @@ const exportedMethods = {
     return await this.getInstructorById(Id);
   },
 
-  async addAppointment(Id, studentName, email, type, instructorName, date, time){
+  async addAppointmentToInstructor(Id, studentId, type, date, time, cost){
     const user = await userData.getUserById(Id);
     let newAppts = user.appointments;
-    newAppts = user.appointments.concat(appointmentData.createAppointment(studentName, email, type, instructorName, date, time))
+    newAppts = user.appointments.concat(appointmentData.createAppointment(studentId, Id, type, date, time, cost))
     let updatedInstructor = {
       appointments: newAppts
     };
@@ -85,10 +85,10 @@ const exportedMethods = {
 
   async addApptType(Id, name, date, time, instrument, duration){
     const user = await this.getInstructorById(Id);
-    let newAppts = user.allowedTimes;
-    newAppts = user.allowedTimes.concat(await appointmentData.createApptType(Id, name, date, time, instrument, duration));
+    let newAppts = user.appointmentTypes;
+    newAppts = user.appointmentTypes.concat(await appointmentData.createApptType(Id, name, date, time, instrument, duration));
     let updatedInstructor = {
-      allowedTimes: newAppts
+      appointmentTypes: newAppts
     };
     const instructorCollection = await users();
     const updateInfo = await instructorCollection.findOneAndUpdate(

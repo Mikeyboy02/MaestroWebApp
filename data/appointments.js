@@ -3,23 +3,22 @@ import bcrypt from 'bcryptjs';
 
 const exportedMethods = {
 
- createAppointment(studentName, email, type, instructorName, Date, Time) {
+ async createAppointment(studentId,instructorId, type, date, time, cost) {
   const newAppt = {
-    student:studentName,
-    email:email,
+    studentId:studentId,
+    instructorId: instructorId,
     type:type,
-    instructor:instructorName, 
-    date: Date,
-    time:Time
+    date: date,
+    time:time,
+    cost:cost
   };
   return newAppt;
  },
- async createApptType(instructorId, instructorName, date, time, instrument, duration){
+ async createApptType(instructorId, instructorName, cost, instrument, duration){
   const newAppt = {
     instructorId: instructorId,
     instructorName: instructorName,
-    date: date,
-    time: time,
+    cost:cost,
     duration: duration,
     instrument: instrument
   };
